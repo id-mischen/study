@@ -1,0 +1,62 @@
+<div class="col-md-3 side-bar">
+    <div class="panel panel-default corner-radius">
+        <div class="panel-heading">
+            <h3 class="panel-title">BBS</h3>
+        </div>
+        <!--开始判断-->
+        {empty name='user'}
+        <div class="panel-body text-center">
+            <a href="__ROOT__/index/register" class="btn btn-primary">
+                <i class="fa fa-user"> </i> 注册
+            </a>
+        </div>
+        <div class="panel-footer text-center">
+            已注册用户请 <a href="__ROOT__/index/login">登录</a>
+        </div>
+        {else/}
+        <div class="panel-body text-center">
+            <a href="__ROOT__/Topic/newpost" class="btn btn-primary">
+                <i class="fa fa-user"> </i>发帖
+            </a>
+        </div>
+        {/empty}
+
+
+    </div>
+
+    <div class="panel panel-default corner-radius">
+        <div class="panel-heading">
+            <h3 class="panel-title">热门标签</h3>
+        </div>
+        <div class="panel-body">
+            <div class="badge badge-tag-cloud">
+                标签
+                 (7)
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default corner-radius">
+        <div class="panel-heading">
+            <h3 class="panel-title">小贴士</h3>
+        </div>
+        <div class="panel-body">
+            &nbsp;&nbsp;人吧，老天就喜欢和你开玩笑，你要向南走，北边的门却开着。
+        </div>
+    </div>
+
+    <div class="panel panel-default corner-radius">
+        <div class="panel-heading">
+            <h3 class="panel-title">统计信息</h3>
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item">社区会员: {$user_num}</li>
+            <li class="list-group-item">主题数: {$topic_num}</li>
+            <li class="list-group-item">回帖数: {$reply_num}</li>
+        </ul>
+    </div>
+
+
+</div>
+<div class="clearfix"></div>
+
+</div>

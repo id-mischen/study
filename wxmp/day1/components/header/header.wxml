@@ -1,0 +1,14 @@
+<!--components/header.wxml-->
+<view class="header">
+    <view>This is Header - {{ title }}</view> 
+    <view> 头部内部元素：{{ show }}</view>
+    <view bindtap="onTap">触发父组件</view>
+
+
+
+    
+   
+
+</view>
+
+<view class="br"></view>

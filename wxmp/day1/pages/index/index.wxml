@@ -1,0 +1,6 @@
+<!--index.wxml-->
+<view class="container">
+    <component-header title="{{ title }}" bindmyevent="onMyEvent" id="component-header"></component-header>
+    <component-header ></component-header>
+  <button bindtap="goPage"> 跳转 </button>
+</view>

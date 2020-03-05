@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="root">
+        无防抖无节流：<input type="text" id="content" />
+        <br/>
+        有防抖无节流：<input type="text" id="debounce" />
+        <br/>
+        有防抖有节流：<input type="text" id="throttle">
+    </div>
+    <script>
+        window.onload = function () {
+            let oContent = document.getElementById('content') ,
+                oDebounce = document.getElementById('debounce'),
+                oThrottle = document.getElementById('throttle');
+            let i = 0;
+                oContent.addEventListener('input', function () {
+                    console.log(i++)
+                });
+                oDebounce.addEventListener('input',debounce(function (e) {
+                    console.log(i++) ;
+                    console.log(e) ;
+                }, 1000));
+                oThrottle.addEventListener('input',debounceThrottle(function () {
+                    console.log(i++) ;
+                }, 1000))
+
+        };
+        /**
+         * 函数防抖
+         * */
+        function debounce(fn, time) {
+            let timer = null ;
+            return function(){
+                clearTimeout(timer) ;
+                timer = setTimeout( ()=> {
+                    fn.apply(this, arguments) ;
+                }, time)
+            }
+        }
+        /**
+         * 函数节流
+         * 延时器
+         * */
+        function throttle(fn, delay){
+            let timer ;
+            return function () {
+                if(timer){ // first: undefined
+                    return
+                }
+                timer = setTimeout(()=>{
+                    fn.apply(this, arguments) ;
+                    timer = null ;
+                }, delay)
+            }
+        }
+        /**
+         * 函数节流
+         * 时间戳
+         * */
+        function throttleTime(fn, delay) {
+            let first  = +new Date() ;
+            console.log("first:", first) ;
+            return function () {
+                let now = +new Date();
+                if( now > first + delay){
+                    first = now ;
+                    fn.apply(this, arguments) ;
+                }
+            }
+        }
+
+        /**
+         * 函数防抖、节流*/
+        function debounceThrottle(fn, delay){
+            let timer, temp  = +new Date();
+            return function () {
+                let now = +new Date() ;
+                if(now > temp + delay ){
+                    fn.apply(this, arguments) ;
+                    temp = now ;
+                    console.log("now----")
+                } else {
+                    clearTimeout(timer) ;
+                    timer = setTimeout(()=>{
+                        fn.apply(this, arguments) ;
+                        console.log("定时器----")
+                    }, delay) ;
+                }
+            }
+        }
+
+        // function throttle(fun, delay) {
+        //     let last, deferTimer ;
+        //     return function (args) {
+        //         let that = this ;
+        //         let _args = arguments ;
+        //         let now = +new Date() ;
+        //         console.log("last-n:",last) ;
+        //         console.log("now:",now) ;
+        //         if (last && now < last + delay) {
+        //             clearTimeout(deferTimer) ;
+        //             deferTimer = setTimeout(function () {
+        //                 last = now ;
+        //                 console.log("last:----------------------------------", now) ;
+        //                 fun.apply(that, _args)
+        //             }, delay)
+        //         } else {
+        //             last = now ;
+        //             fun.apply(that, _args)
+        //         }
+        //     }
+        //
+        // }
+    </script>
+</body>
+</html>

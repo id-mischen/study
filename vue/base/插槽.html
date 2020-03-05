@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
+<head>
+    <meta charset="UTF-8">
+    <title>Rainy</title>
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+
+</head>
+<body>
+<div id="root">
+    <Father>
+        <template v-slot:header="props">
+            {{ props.cc.jop }} 0
+        </template>
+        <template v-slot:footer="props">
+            我是尾部
+        </template>
+    </Father>
+</div>
+<script>
+    let Father = {
+        data() {
+            return {
+                name: 'Father',
+                age: 19,
+                info:{
+                    name: 'Father',
+                    jop: '程序员'
+                }
+            }
+        },
+        template: `<div>
+        <h1>我是Father</h1>
+        <div class="header">
+        <slot name="header" :cc="info">{{ info.name }}</slot>
+</div>
+<div class="footer">
+    <slot name="footer"></slot>
+</div>
+</div>`
+    };
+    let vm = new Vue({
+        el: "#root",
+        components: {
+            Father
+        },
+        data: {
+
+        }
+
+    })
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

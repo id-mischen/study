@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rotation - 自转</title>
+    <style>
+        *{
+            padding: 0 ;
+            margin: 0 ;
+        }
+        #root{
+            width: 60%;
+            margin: 5% auto;
+        }
+        #myCanvas{
+            border:1px solid blue ;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <canvas id="myCanvas" width="500" height="500"></canvas>
+    </div>
+    <script>
+
+        function draw(){
+            let c = document.getElementById("myCanvas") ;
+            let ctx = c.getContext("2d") ;
+            let time = new Date() ;
+
+            ctx.clearRect(0, 0, 500, 500) ; //清除画布
+            ctx.save() ;
+            //绘制黑色画布
+            ctx.fillStyle = "black" ;
+            ctx.fillRect(0 ,0, 500, 500) ;
+            ctx.translate(250, 250) ;
+
+
+            //圆
+            ctx.beginPath() ;
+            ctx.arc(0, 0, 50, 0, 2 * Math.PI) ;
+            ctx.strokeStyle = "yellow" ;
+            ctx.stroke() ;
+
+            //地球
+            ctx.beginPath() ;
+            ctx.fillStyle = "blue" ;
+            ctx.rotate(2 * Math.PI / 6 * time.getSeconds() + 2 * Math.PI / 6000 * time.getMilliseconds()) ;
+            ctx.arc(50 ,0 , 10, 0, 2 * Math.PI) ;
+            ctx.fill() ;
+
+            ctx.restore() ;
+            requestAnimationFrame(draw) ;
+
+        }
+        draw() ;
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>API</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="root">
+        {{ name }}
+    </div>
+    <script>
+        // let Profile  = Vue.extend({
+        //     template: '<div>this is extend -- > {{ name }}</div>',
+        //     data: function(){
+        //         return{
+        //             name: 'Rainy'
+        //         }
+        //     }
+        // }) ;
+        // console.log(new Profile()) ;
+        // new Profile().$mount('#root') ;
+        let vm = new Vue({
+            el: "#root",
+            data:{
+                name: "Rainy"
+            }
+        })
+    </script>
+</body>
+</html>

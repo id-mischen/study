@@ -1,0 +1,23 @@
+1，全局API
+            extend
+        1, let Profile  = Vue.extend({
+                    template: '<div>this is extend -- > {{ name }}</div>',
+                    data: function(){
+                        return{
+                            name: 'Rainy'
+                        }
+                    }
+                }) ;
+            new Profile().$mount('#root') ;
+
+        2,nextTick  //更新DOM
+        3,  set(target, propertyName/index, value) //响应式更新数据
+            delete(target, propertyName/index, value)  //删除数据
+
+2，选项、DOM
+        1，el
+            如果 render 函数和 template 属性都不存在，挂载 DOM 元素的 HTML 会被提取出来用作模板，
+            此时，必须使用 Runtime + Compiler 构建的 Vue 库
+        2，template
+        3，render
+            (createElement: () => VNode) => VNode

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #myCanvas{
+            border:1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <canvas id="myCanvas" width="500" height="500"></canvas>
+    </div>
+    <script>
+        let c = document.getElementById("myCanvas") ;
+        let ctx = c.getContext("2d");
+
+        ctx.strokeStyle = "blue" ;
+        ctx.fillStyle = "red" ;
+        ctx.lineWidth = "3" ;
+        // ctx.globalAlpha = 0.2 ;
+
+        //线条绘制 矩形
+        ctx.beginPath() ;
+        ctx.moveTo( 10, 10) ;
+        ctx.lineTo( 100, 10);
+        ctx.lineTo( 100, 110) ;
+        ctx.lineTo( 10, 110) ;
+        // ctx.lineTo( 10, 10) ;  与closePath 效果一直，都是回到原点
+        ctx.closePath() ;
+        ctx.stroke() ;
+        ctx.fill() ;
+
+        //矩形 -rect
+        ctx.beginPath() ;
+        ctx.rect(100, 100, 200, 200);
+        ctx.stroke() ;
+        ctx.fill() ;
+
+        //矩形 - fillRect
+        ctx.fillRect(110, 110, 100 ,100);
+        ctx.fillStyle = "pink" ;
+        ctx.font = "30px Arial" ;
+        ctx.textAlign="left";
+        ctx.fillText("hello wold" , 110, 110) ;
+        ctx.fillRect(120,120, 100, 100) ;
+
+        //矩形 - strokeRect
+        ctx.strokeStyle = "black" ;
+        ctx.lineWidth = "3" ;
+        ctx.lineJoin = "miter" ;
+        ctx.setLineDash([10, 5]);  // [实线长度, 间隙长度]
+        ctx.lineDashOffset = 20;
+        ctx.strokeRect( 130, 130, 100, 100) ;
+
+        //清楚画布
+        ctx.save();
+        ctx.clearRect(0 ,0 , 100, 100);
+
+
+
+
+        //
+        // //填充矩形
+        // // ctx.strokeStyle = "blue" ;
+        // // ctx.strokeWidth = "10" ;
+        // // ctx.stroke();
+        // ctx.fillStyle = "gold";
+        // ctx.fillRect(100, 100, 200, 200);
+        // ctx.strokeStyle = "blue" ;
+        // ctx.strokeWidth = "10" ;
+        // ctx.stroke();
+    </script>
+</body>
+</html>

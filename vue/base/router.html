@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Router</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>Hello App!</h1>
+        <p>
+            <!-- 使用 router-link 组件来导航. -->
+            <!-- 通过传入 `to` 属性指定链接. -->
+            <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
+            <router-link to="/foo/3">Go to Foo</router-link>
+            <router-link to="/foo/4">Go to Foo</router-link>
+            <router-link to="/bar">Go to Bar</router-link>
+            <router-link to="/view">Go to View</router-link>
+        </p>
+        <!-- 路由出口 -->
+        <!-- 路由匹配到的组件将渲染在这里 -->
+        <router-view></router-view>
+        <router-view name="rainy"></router-view>
+        <router-view name="mis_chen"></router-view>
+    </div>
+    <script>
+
+        const Foo = {
+            props: ['id'],
+            template: '<div>foo {{ $route.params.id }} -- 解耦prop：{{ id }}</div>',
+            created(){
+            },
+           /* beforeRouteUpdate(to, from, next){
+                console.log("update") ;
+                console.log(this.id);
+                next()
+            }*/
+           watch: {
+               '$route'(to, from){
+                   console.log('update') ;
+               }
+           }
+        }
+        const Bar = {
+            template: '<div>bar</div>',
+
+        };
+        const Rainy = { template: '<div>Rainy</div>' }
+        const MisChen = { template: '<div>mis _ chen</div>' }
+
+
+        const routes = [
+            { path: '/foo/:id', component: Foo ,props: true },
+            { path: '/bar', component: Bar,props:{ rainy: true} },
+            {
+                path: '/view',
+                components: {
+                    default: Foo,
+                    'rainy': Rainy,
+                    'mis_chen': MisChen,
+                    meta: { requiresAuth: true }
+                },
+                alias: '/bar'
+            }
+        ];
+
+
+
+        const router = new VueRouter({
+            mode: 'hash',  //hash
+            routes // (缩写) 相当于 routes: routes
+        });
+       /* router.beforeEach((to, from, next)=>{
+            // console.log("to:",to, "from:",from, next) ;
+            // console.log(to.matched.some(record => record.meta.requiresAuth));
+            to.matched.some(record => {
+                console.log(record) ;
+            })
+            if (to.matched.some(record => record.meta.requiresAuth)) {
+                // this route requires auth, check if logged in
+                // if not, redirect to login page.
+                if (!auth.loggedIn()) {
+                    next({
+                        path: '/login',
+                        query: { redirect: to.fullPath }
+                    })
+                } else {
+                    next()
+                }
+            } else {
+                next() // 确保一定要调用 next()
+            }
+        });
+        router.afterEach((to, from)=>{
+            // console.log(to,from)
+        });*/
+
+        Vue.use(router) ;
+        new Vue({
+            el: "#root",
+            router,
+            data:{
+
+            }
+        })
+
+       /* const vm = new Vue({
+            router
+        }).$mount('#root') ;*/
+    </script>
+</body>
+</html>

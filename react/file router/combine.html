@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        function View(props) {
+            return(
+                <div>
+                    { props.title }{ props.children }
+                </div>
+            )
+        }
+        class Data extends React.Component{
+            constructor(){
+                super();
+            }
+            render(){
+                return(
+                    <div>
+                        <View title="电影">
+                            <div>
+                                我是电影的孩子
+                            </div>
+                        </View>
+                        <View title="影院"/>
+                        <View title="我的"/>
+
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(
+            <Data />,
+            document.getElementById("root")
+        )
+    </script>
+</body>
+</html>

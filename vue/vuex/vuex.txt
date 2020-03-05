@@ -1,0 +1,332 @@
+1，状态管理模式
+        容器：store（仓库）
+        组成：
+            1，state：驱动应用的数据源
+            2，view：以声明方式映射到视图中
+            2，action：响应view上用户输入导致的状态变化
+            state--> view--->action -->state ...
+
+        图：
+            state  --------> Vue components --------->actions--------->mutations-------->state
+                    render                  dispatch            commit           mutate
+
+2，原生
+        new Vuex.Store({
+            state,
+            mutations:{
+                increment(state){
+                    state.xxx++
+                }
+            }
+        })
+
+        new Vue({
+            el: '#root'
+            store,
+            data:{}
+        })
+
+        数据：  store.state.count
+                store.commit('increment')  //mutations的名字
+3，state 变量
+        1,由于vuex的状态存储是响应式的，从store实例中读取状态最简单的方法： 计算属性
+
+        2,computed:{
+            count(){
+                return store.state.count
+            }
+          }
+
+        3, Vuex 通过 store 选项，提供了一种机制将状态从根组件“注入”到每一个子组件中
+           （需调用 Vue.use(Vuex)
+
+        4, 注入到根组件: this.$store.state.xxx  、、访问
+        5, mapState辅助函数
+                import { mapState } from 'vuex'
+
+                1, computed: mapState({
+                        // 箭头函数可使代码更简练
+                        count: state => state.count,
+                        // 传字符串参数 'count' 等同于 `state => state.count`
+                        countAlias: 'count',
+                        // 为了能够使用 `this` 获取局部状态，必须使用常规函数
+                        countPlusLocalState (state) {
+                          return state.count + this.localCount
+                        }
+                   })
+                2, 当映射的计算属性的名称与 state 的子节点名称相同时，我们也可以给 mapState 传一个字符串数组。
+                    computed: mapState([
+                      // 映射 this.count 为 store.state.count
+                      'count'
+                    ])
+                3,  和局部函数混合使用
+                        computed:{
+                            part(){
+
+                            },
+                            ...mapState({
+                                xxx
+                            })
+
+                        }
+4, getter  变量
+        计算属性： store，getter的返回值会根据它的依赖被缓存下来，且只有当依赖值发生变化
+                才会被重新计算
+        1, new Vuex.Store({
+            getters: {
+                filterCount: state => state.count + 100 ,
+                //传参,筛选数据
+                paramCount: state => id = > state.xx  //id 传入的参数
+
+            }
+        })
+        2, 获取： store.getters.filterCount
+        3, mapGetters 辅助函数
+                仅仅是将 store 中的 getter 映射到局部计算属性：
+             computed:{
+                ...mapGetter([
+                    'doneTodosCount',  //变量名称
+                    'anotherGetter',
+                ])
+                    别名 【注意：】对象
+                mapGetters({
+                    'name_alias': xxx
+                })
+             }
+5，mutation  事件
+        1， 更改 vuex中 store的状态唯一方法： commit('mutation')
+            每个 mutation 都有一个字符串的 事件类型 (type) 和 一个 回调函数 (handler)。
+            这个回调函数就是我们实际进行状态更改的地方，并且它会接受 state 作为第一个参数：
+        mutations: {
+            increment (state) {
+              // 变更状态
+              state.count++
+            }
+        }
+        2，提交载荷（传入参数）
+                store.commit('mutation_name', data: 参数)
+                在大多数情况下，载荷应该是一个对象，
+                这样可以包含多个字段并且记录的 mutation 会更易读：
+
+        3，另类风格
+                store.commit({
+                  type: 'increment',  //mutation_name
+                  amount: 10
+                })
+                mutations: {
+                  increment (state, payload) {   //保持不变
+                    state.count += payload.amount
+                  }
+                }
+        4，Mutation必须是同步的
+                原因：回调函数中进行的状态的改变都是不可追踪的。
+        5，辅助函数
+                mapMutation
+
+                methods:{
+                    ...mapMutations([
+                        'increase',
+                        'reduce'
+                    ])
+                    ...mapMutations({
+                          add: 'increment' // 将 `this.add()` 映射为 `this.$store.commit('increment')`
+                    })
+                }
+6, action
+       1， Action类似于mutation，不同于：
+               1，Action 提交的是 mutation，而不是直接变更状态。
+               2，Action 可以包含任意异步操作。
+       2， new Vuex.Store({
+            actions:{
+                increment(context){
+                    context.commit('')
+                }
+            },
+            //解构
+            actions:{
+                increment({ commit }){
+                    commit('mutation_name') ;
+                }
+            }
+        })
+
+       3，context:  函数接受一个与 store 实例具有相同方法和属性的 context 对象
+                    context 对象不是 store 实例本身了
+       4，分发action
+                store.dispatch('actions_name')
+                this.$store.dispatch('xxx')
+
+       5，异步
+                actions: {
+                  incrementAsync ({ commit }) {
+                    setTimeout(() => {
+                      commit('increment')
+                    }, 1000)
+                  }
+                }
+       6，载荷
+            // 以载荷形式分发
+            store.dispatch('incrementAsync', {
+              amount: 10
+            })
+
+            // 以对象形式分发
+            store.dispatch({
+              type: 'incrementAsync',
+              amount: 10
+            })
+
+            actions: {
+              checkout ({ commit, state }, products) {
+                // 把当前购物车的物品备份起来
+                const savedCartItems = [...state.cart.added]
+                // 发出结账请求，然后乐观地清空购物车
+                commit(types.CHECKOUT_REQUEST)
+                // 购物 API 接受一个成功回调和一个失败回调
+                shop.buyProducts(
+                  products,
+                  // 成功操作
+                  () => commit(types.CHECKOUT_SUCCESS),
+                  // 失败操作
+                  () => commit(types.CHECKOUT_FAILURE, savedCartItems)
+                )
+              }
+            }
+       7，辅助函数
+            mapActions
+
+            methods:{
+                ...mapActions({
+                    add: 'increment'
+                })
+                ...mapActions([
+                    'add',
+                    'reduce'
+                ])
+            }
+7，module
+        const moduleA = {
+          state: { ... },
+          mutations: { ... },
+          actions: { ... },
+          getters: { ... }
+        }
+
+        const moduleB = {
+          state: { ... },
+          mutations: { ... },
+          actions: { ... }
+        }
+
+        const store = new Vuex.Store({
+          modules: {
+            a: moduleA,
+            b: moduleB
+          }
+        })
+
+        store.state.a // -> moduleA 的状态
+        store.state.b // -> moduleB 的状态
+
+        1, 模块的局部状态
+                mutations getters : 接受的第一个参数是模块的局部状态对象。
+
+                2，同样，对于模块内部的 action，局部状态通过 context.state 暴露出来，
+                    根节点状态则为 context.rootState：
+                    incrementIfOddOnRootSum ({ state, commit, rootState }) {
+                          if ((state.count + rootState.count) % 2 === 1) {
+                            commit('increment')
+                          }
+                    }
+
+
+        1, 命名空间
+                namespaced: true
+                全局 commit
+                commit('someMutation', null, { root: true }) // -> 'someMutation'
+
+                若需要在带命名空间的模块注册全局 action，你可添加 root: true，并将这个 action 的定义放在函数
+            {
+              actions: {
+                someOtherAction ({dispatch}) {
+                  dispatch('someAction')
+                }
+              },
+              modules: {
+                foo: {
+                  namespaced: true,
+
+                  actions: {
+                    someAction: {
+                      root: true,
+                      handler (namespacedContext, payload) { ... } // -> 'someAction'
+                    }
+                  }
+                }
+              }
+            }
+
+            computed: {
+              ...mapState('some/nested/module', {
+                a: state => state.a,
+                b: state => state.b
+              })
+            },
+7，插件
+        export default function createWebSocketPlugin (socket) {
+          return store => {
+            socket.on('data', data => {
+              store.commit('receiveData', data)
+            })
+            store.subscribe(mutation => {
+              if (mutation.type === 'UPDATE_DATA') {
+                socket.emit('update', mutation.payload)
+              }
+            })
+          }
+        }
+
+
+        const plugin = createWebSocketPlugin(socket)
+
+        const store = new Vuex.Store({
+          state,
+          mutations,
+          plugins: [plugin]
+        })
+8，表单处理
+        双向绑定的计算属性
+        <input v-model="message">
+        computed: {
+          message: {
+            get () {
+              return this.$store.state.obj.message
+            },
+            set (value) {
+              this.$store.commit('updateMessage', value)
+            }
+          }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

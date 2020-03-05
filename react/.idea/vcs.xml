@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/1.7/rainy" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/day1/mischen" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/day2/test" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/day3/mischen" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/demo/react-pxq" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/file router/mischen" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/project/admin" vcs="Git" />
+  </component>
+</project>

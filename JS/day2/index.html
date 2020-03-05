@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>渐变、动画</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #box{
+            /*background: radial-gradient(red, green, blue); !* 标准的语法 *! !* 标准的语法 *!*/
+            /*background: radial-gradient(red 5%, green 15%, blue 60%); !* 标准的语法 *!*/
+            background: radial-gradient( ellipse,red, yellow, green); /* 标准的语法 */
+            width:200px;
+            height:200px;
+        }
+        .box2 , .box3, .box4 , .box5{
+            width:200px;
+            height:200px;
+            border:1px solid red;
+        }
+        .box2{
+            background: radial-gradient(closest-side circle at 50% 75%, rgb(220, 75, 200),rgb(0, 0, 75));
+            /*transform:translate3d(10px,10px,-10px);*/
+            /*transform:rotate3d(0, 0, 1, -0.5deg) ;*/
+            transform: scale(1.2,1.2);
+            transition: all 2s;
+        }
+        .box3{
+            background: radial-gradient(farthest-side circle , rgb(220, 75, 200),rgb(0, 0, 75));
+        }
+        .box4{
+            background: radial-gradient(closest-corner circle at 50% 75%, rgb(220, 75, 200),rgb(0, 0, 75));
+        }
+        .box5{
+            background: radial-gradient(farthest-corner circle at 50% 75%, rgb(220, 75, 200),rgb(0, 0, 75));
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <div class="box2"></div>
+    <div class="box3"></div>
+    <div class="box4"></div>
+    <div class="box5"></div>
+
+</body>
+</html>

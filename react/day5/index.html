@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rainy</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <!-- 生产环境中不建议使用 -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <style>
+        .red{
+            color: red;
+            font-size: 20px;
+        }
+        .green{
+            color: green;
+            font-size: 30px;
+        }
+        .border{
+            border:1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+        function View(props){
+            return props.isShow ? <div className="view">this is view</div> : null ;
+        }
+        class Admin extends React.Component{
+            constructor(){
+                super() ;
+                this.state = {
+                    name: 'Rainy',
+                    isShow: false
+                }
+            }
+            /*componentWillMount(){
+                this.state.name = 'aaaaaaa';
+                console.log('componentWillMount',document.getElementById('a'));
+            }
+            componentDidMount(){
+                console.log('componentDidMount',document.getElementById('a'));
+            }
+            componentWillUpdate(){
+                console.log("componentWillUpdate") ;
+            }
+            componentDidUpdate(oldProps, oldState){
+                console.log("componentDidUpdate") ;
+                console.log(oldProps, oldState) ;
+            }
+            componentWillReceiveProps(){
+                console.log('componentWillReceiveProps')
+            }
+            shouldComponentUpdate(newProps, newState){
+                console.log('shouldComponentUpdate') ;
+                console.log(newProps, newState) ;
+                return true
+            }*/
+           /* handleClick(e){
+                console.log("hello world：",e)
+            }*/
+            handleClick = () => {
+                /*this.setState(( state, props)=>{
+                    console.log(state) ;
+                    console.log(props) ;
+                    state.isShow = !state.isShow ;
+                    return state
+                })*/
+                this.setState( state => ({
+                    isShow: !state.isShow
+                }))
+            } ;
+            render(){
+                return(
+                    <div>
+                        <p id="a">this is admin - { this.props.name }</p>
+                        <View isShow={ this.state.isShow }></View>
+                        <button onClick={ this.handleClick }>打开视图</button>
+                    </div>
+                )
+            }
+        }
+
+        class NameForm extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    value: '',
+                    age: 19,
+                    isGoing: false
+                };
+
+                this.handleChange = this.handleChange.bind(this);
+                this.handleSubmit = this.handleSubmit.bind(this);
+            }
+
+            handleChange(event) {
+                console.log(event.target) ;
+
+                this.setState({
+                    [ event.target.name ]: event.target.value
+                });
+            }
+
+            handleSubmit(event) {
+                // alert('A name was submitted: ' + this.state.value);
+                console.log(this.state) ;
+                event.preventDefault();
+            }
+
+            render() {
+                return (
+                    <form onSubmit={this.handleSubmit}>
+                        <p>
+                            Name:
+                            <input type="text" value={this.state.value} onChange={this.handleChange} name="value" />
+                        </p>
+                        <p>
+                            age:
+                            <input type="text" value={this.state.age} onChange={this.handleChange} name="age"/>
+                        </p>
+                        <p>
+                            checked:
+                            <input type="checkbox" checked={this.state.isGoing} onChange={this.handleChange} name="isGoing"/>
+                        </p>
+                        <input type="submit" value="Submit" />
+                    </form>
+                );
+            }
+        }
+
+
+        ReactDOM.render(
+            <div>
+                <NameForm />
+            </div>,
+            document.getElementById('app')
+        )
+    </script>
+</body>
+</html>

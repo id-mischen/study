@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户信息</title>
+</head>
+<style>
+    .main_left{
+        border: 1px solid ghostwhite;
+        width: 300px;
+        height: 300px;
+        float: left;
+    }
+  
+</style>
+<body>
+<div id="main">
+    {volist name='userdata' id='users'}
+    <div class="main_left" >
+        <?php
+
+            $show_img = app\index\model\Upload :: getByUserId($users->id);
+
+        ?>
+        <span><img src="__UPLOADS__/{$show_img.url}" width="100px" height="150px"></span>
+        <p>用户名：{$users.name}</p>
+        <p>Email：{$users.email}</p>
+        <p>注册时间：<?=date('Y-m-d H:i:s',$users->created_at)?></p>
+
+    </div>
+    {/volist}
+</div>
+
+
+</body>
+</html>

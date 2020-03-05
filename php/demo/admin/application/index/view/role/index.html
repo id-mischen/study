@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>角色管理</title>
+    {include file="public/header"/}
+</head>
+<body>
+    {notempty name="$Think.session.success"}
+    <div class="alert alert-info">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        {$Think.session.success}
+    </div>
+    {/notempty}
+<form class="form-inline" role="form">
+    <div class="form-group">
+        <label class="form-label">&nbsp;查询:</label>
+        <input type="text" class="form-control" name="name">
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary">查询</button>
+    </div>
+    <div class="form-group">
+        <button type="button" class="btn btn-info" id="add">添加</button>
+    </div>
+</form>
+<p>
+<table class="table table-hover table-bordered table-striped" width="100%">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>角色名称</th>
+        <th>权限列表</th>
+        <th>创建时间</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <?php foreach($data as $datak=>$datav):?>
+    <tr>
+        <td>{$datav.id}</td>
+        <td>{$datav.name}</td>
+        <td>{$datav.privilege_text}</td>
+        <td>{$datav.create_time}</td>
+        <td width="10%" style="text-align: center;">
+            <button class="btn btn-sm btn-primary edit"  _attr="{$datav.id}">编辑</button>
+            <button class="btn btn-sm btn-danger del" _attr="{$datav.id}">删除</button>
+        </td>
+    </tr>
+    <?php endforeach;?>
+</table>
+        {$data->render()}
+</p>
+</body>
+</html>
+<script>
+    var indexinfo = (function () {
+        var addView = "{:URL('index/Role/addView')}";
+        var addUrl = "{:URL('index/Role/add')}";
+        var saveView="{:URL('index/Role/saveView')}";
+        var saveUrl="{:URL('index/Role/save')}";
+        var delView="{:URL('index/Base/delConfirm')}";
+        var delUrl="{:URL('index/Role/del')}";
+        return {
+            addUrl: addUrl,
+            addView: addView,
+            saveView:saveView,
+            saveUrl:saveUrl,
+            delView:delView,
+            delUrl:delUrl,
+            privilege_arr:''
+        };
+    })();
+</script>
+<script src="/static/js/logic/role.js"></script>
+<!-- cdn 一款bootstrap-select插件-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>

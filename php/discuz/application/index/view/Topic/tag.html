@@ -1,0 +1,100 @@
+{include file='common/header'}
+<div id="main" class="main-container container">
+    <div class="row max-width">
+        <div class="col-xs-12">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="index.html">首页</a>
+                </li>
+                <li>
+                    <strong>标签</strong>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-md-9 threads-index main-col">
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <div class="pull-left hidden-sm hidden-xs">
+                    <div class="node-info">
+                        标签名: <a href="__ROOT__/tag/newtagsort/id/1"> <strong>imooc</strong> </a>
+                        <a href="__ROOT__/tag/newtagsort/id/2"> <strong>Mobile</strong> </a>
+                        <a href="__ROOT__/tag/newtagsort/id/3"> <strong>technoloy</strong> </a><br>
+                        <span class="total">共有 {$num} 个讨论主题</span>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="panel-body remove-padding-horizontal">
+                <ul class="list-group row thread-list">
+                    <?php
+                        use app\index\model\Upload;
+                        foreach($data as $topic ){
+                                     $show_img = Upload::getByUserId($topic->user_id);
+                    ?>
+                    <li class="list-group-item media " style="margin-top: 0px;">
+                        <a class="pull-right" href="post.html"><span class="badge badge-reply-count"> <?=$topic->reply_count?> </span>
+                        </a>
+                        <div class="avatar pull-left">
+                            <a href="post.html">
+                                <img class="media-object img-thumbnail avatar-48" alt="imooc" src="__UPLOADS__/{$show_img['url']}"/>
+                            </a>
+                        </div>
+                        <div class="infos">
+                            <div class="media-heading">
+                                <i class="fa fa-thumb-tack text-danger"></i>
+                                <a href="__ROOT__/topic/detail/id/<?=$topic->id?>" title="imooc 接下来需要完善的功能">
+                                    <?=$topic->title?>
+                                </a>
+                            </div>
+                            <div class="media-body meta">
+                                <a href="__ROOT__/topic/praise/id/<?=$topic->id?>">
+                                    <span class="fa fa-thumbs-o-up"> <?=$topic->praise_count?> </span>
+                                </a>
+                                <span> • </span>
+
+                                <a href="thread.html">
+                                    <?php
+                                     $catename = getCategoryName($topic->category_id);
+                                                echo $catename['1'];
+                                    ?>
+                                </a>
+                                <span> • </span>
+                                <!-- <span> • </span> -->
+                                <span class="tag-list hidden-xs">
+                                <a href="tag.html"><span class="tag">
+                                    <?php
+                                    foreach($topic->tag as $value){
+                                            echo $value->name ;
+                                    }
+                                    ?>
+
+                                </span></a>
+                            <span> • </span>
+            </span>
+                                <span>回复</span>
+                                <a href="post.html">
+                                    <?=$topic->user->name?>
+                                </a>
+                                <span> • </span>
+                                <span class="timeago " data-toggle="tooltip" data-placement="top"
+                                      title="2017-02-08 21:47:25"><?=date('Y-m-d H:i:s',$topic->created_at)?></span>
+                            </div>
+                        </div>
+                    </li>
+                    <?php
+                        }
+                    ?>
+                </ul>
+            </div>
+            <div class="panel-footer text-right remove-padding-horizontal pager-footer">
+                <!-- Pager -->
+            </div>
+        </div>
+        <!-- Nodes List -->
+    </div>
+    {include file='common/indexright'}
+{include file='common/footer'}

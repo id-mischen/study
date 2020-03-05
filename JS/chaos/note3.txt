@@ -1,0 +1,107 @@
+1，class
+	class Point{
+		constructor(x, y){ //传入的参数
+			this.x = x;
+			this.y = y;
+		}
+		showName(){}  //方法
+	}
+2，get set，过滤数据
+	1，进行拦截 
+	2，get prop(){}
+	     set  prop(value){}  //必须保证一个形参
+3，class 表达式
+	let MyClass = class Me {}
+
+	1，Me仅限于class 内部使用
+	2，外部使用 MyClass
+	3，this的使用，【注意】： this 容易 忽视丢失 它默认指向类的实例
+		class Show{
+			constructor(){
+				this.printName = this.printName.bind(this) ;
+				this.printName = () => this ; //箭头函数无this，所以可改变this
+			}
+			printName(name = "rainy"){
+				console.log(this) ;
+				this.print(name) ;
+			}
+			print(text){ 
+				console.log(text) ;
+			}
+		}
+		let name = new Show() ;
+		let { printName } = name; //this 消失, 若没绑定this
+		printName("c")
+4, 静态方法
+	1, 表示该方法 不会被实例继承 。
+	2，需要 自身类调用。 class.show()
+	3, 如果 static 中包含 this， this指的是类自身，不是实例化的this
+		class Foo {
+			static bar() {
+				this.baz();
+			}
+			static baz() {
+				console.log('hello');
+			}
+			baz() {
+				console.log('world');
+			}
+		}
+
+		Foo.bar() // hello
+	4，静态方法 可以与非静态方法重名
+	5，父类的静态 方法，可以被子类继承 class Son extends Father {}
+	6, 静态方法也是可以从super对象上调用的。
+		class Foo {
+			static classMethod() {
+				return 'hello';
+			}
+		}
+
+		class Bar extends Foo {
+			static classMethod() {
+				return super.classMethod() + ', too';
+			}
+		}
+
+		Bar.classMethod() // "hello, too"	
+	7, 静态属性
+		// 老写法
+		class Foo {
+			// ...
+		}
+		Foo.prop = 1;
+
+		// 新写法
+		class Foo {
+			static prop = 1;
+		}
+	8, 私有方法、私有属性
+		1，将私有方法移出模块，因为模块内部的所有方法都是对外可见的。
+			class Widget {
+				foo (baz) {
+					bar.call(this, baz);
+				}
+
+			// ...
+			}
+			function bar(baz) {
+				return this.snaf = baz;
+			}-
+二、Class 的继承
+	1，子类必须在constructor中调用 super，否则新建实例 失败，因为子类的this必须通过父类的构造函数完成塑造，
+		得到父类同样的实例属性和方法，再进行加工自己的属性和方法
+	class ColorPoint extends Point {
+		constructor(x, y, color) {
+			super(x, y); // 调用父类的constructor(x, y)，必须写在最前
+			this.color = color;
+		}
+		toString() {
+			return this.color + ' ' + super.toString(); // 调用父类的toString()
+		}
+	}
+	2，ES5 的继承，实质是先创造子类的实例对象this，然后再将父类的方法添加到this上面（Parent.apply(this)）。
+	   ES6 的继承机制完全不同，实质是先将父类实例对象的属性和方法，加到this上面（所以必须先调用super方法），然后再用子类的构造函数修改this。
+	3.
+
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="root">
+        <input type="text" v-model="username">
+        <p> {{username}}</p>
+        <h1>{{nav.title}}</h1>
+        <div class="box">
+            <div>
+                我是测试1
+                <div>
+                    我是测试2
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/mvvm.js"></script>
+    <script src="./js/observer.js"></script>
+    <script src="./js/compile.js"></script>
+    <script src="./js/watcher.js"></script>
+    <script>
+        let vm = new MVVM({
+            el: '#root',
+            data:{
+                username: 'rainy',
+                nav:{
+                    title: 'hello world',
+                }
+            },
+        });
+        console.log(vm) ;
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="../../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+</head>
+<body>
+    <div id="root">
+        <v-header></v-header>
+        <span v-html="html"></span>
+        <button :disabled="null">Button</button>
+        <!--<button @click="handleChange()">测试</button>-->
+    </div>
+    <script>
+
+        /*Vue.component('v-header',{
+            prop: ['name'],
+            template: "<div> 这个是头部 {{ name }}</div>>"
+        });*/
+
+        let data = {
+            name: "rainy"
+        } ;
+        Object.freeze(data) ;
+
+        let vm = new Vue({
+            el: "#root",
+            // template: "<div>这是内部模板</div>",
+            data: {
+                name: 'Rainy',
+                html: '<span style="color: blue"> 这是内部html</span>',
+                isButtonDisabled: true
+            }, //对象：地址，深拷贝
+            method:{
+                // handleChange(){         //undefined  ?
+                //     this.name = "mis_chen" ;
+                // }
+            }
+        });
+
+
+
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数防抖、函数节流</title>
+</head>
+<body>
+    <div id="root">
+        <input type="text" id="username">
+    </div>
+    <script>
+        window.onload = function () {
+            let oUsername = document.getElementById('username') ;
+                oUsername.addEventListener('input',throttleTimeStamp(function (e) {
+                    console.log("哈哈",e) ;
+                }, 1000))
+        };
+        /**
+         * 函数节流(延时器)
+         * */
+        function throttle(fn, delay) {
+            let time ;
+            return function () {
+                if(time){
+                    return
+                }
+                time = setTimeout(()=>{
+                    fn.apply(this,arguments) ;
+                    time = null
+                }, delay)
+            }
+        }
+        /**
+         * 函数节流(时间戳)
+         * */
+        function throttleTimeStamp(fn, delay){
+            let temp = null , timer;
+            return function () {
+                let now = +new Date() ;
+                clearTimeout(timer);
+                if(temp && now > temp + delay){
+                    fn.apply(this, arguments) ;
+                    temp = now;
+                } else {
+                    temp = now ;
+                    timer = setTimeout(()=>{
+                        fn.apply() ;
+                    }, delay)
+                }
+            }
+        }
+    </script>
+</body>
+</html>

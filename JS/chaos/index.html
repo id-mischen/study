@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    .box {
+        width: 800px;
+        height: 1200px;
+    }
+</style>
+<body>
+<div class="container">
+    <div class="box" style="background: tomato"></div>
+    <div class="box" style="background: skyblue"></div>
+    <div class="box" style="background: red"></div>
+    <div class="box" style="background: yellow"></div>
+</div>
+<script>
+    window.onload = function() {
+        const decounce = function(fn, delay) {
+            let timer = null
+
+            return function() {
+                const context = this
+                let args = arguments
+                clearTimeout(timer) // 每次调用debounce函数都会将前一次的timer清空，确保只执行一次
+                timer = setTimeout(() => {
+                    fn.apply(context, args)
+                }, delay)
+            }
+        }
+
+        let num = 0
+
+        function scrollTap() {
+            num++ ;
+            console.log(`看看num吧 ${num}`)
+        }
+        // 此处的触发时间间隔设置的很小
+        document.addEventListener('scroll', decounce(scrollTap, 500))
+        // document.addEventListener('scroll', scrollTap)
+    }
+</script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="root">
+
+    </div>
+
+    <script>
+        // debugger ;
+        // let obj = {
+        //     name: 'CC'
+        // } ;
+        let arr = [1, 2, 3] ;
+        let fn = function(){
+            console.log("cc") ;
+        };
+        //
+        // let c = Object.create(obj) ; //空对象
+        //
+        // console.log("c:",c.name) ;
+        // console.log("c:",c) ;
+
+        let obj = {
+            name :'Rainy'
+        } ;
+        let son = Object.create(obj) ; //Object.create()：将创建对象当做新对象的 __proto__
+
+        son.age = 19;
+        console.log(son.name);  // Rainy
+        console.log(son) ;
+        // son ==
+        // dataService.getAuthors();
+        // dataService.getBooks();
+        // dataService.getUsers();
+        // console.log(dataService);
+
+        //
+        // console.log(obj) ;
+        // console.log( obj.__proto__ === Object.prototype) ;
+        // console.log(obj.__proto__);
+        // console.log(Object()) ;
+
+
+
+        //基本数据类型
+      /*  let num = 3 ;
+        let str = "hello world" ;
+        let boo = true ;
+        let nu = null ;
+        let un = undefined ;*/
+
+
+
+
+    </script>
+</body>
+</html>

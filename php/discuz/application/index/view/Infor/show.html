@@ -1,0 +1,26 @@
+{include file='common/header'}
+{include file='common/mainleft'}
+    <div class="show">
+        <h5><i class="fa fa-tasks"></i>&nbsp;&nbsp;个人信息</h5>
+        {empty name='data'}
+        <p ><a href="__ROOT__/infor/Insertdata"><font size="5px">信息不完整,请完善信息</font></a> </p>
+        {else/}
+        <ul class="show_list">
+            <li>昵称：{$data->name}</li>
+            <li>城市：{$data->city}</li>
+            <li>公司：{$data->company}</li>
+            <li>地址：{$data->address}</li>
+            <li>个性签名：{$data->person}</li>
+            <li>自我介绍：{$data->myself}</li>
+        </ul>
+        {/empty}
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+{include file='common/footer'}

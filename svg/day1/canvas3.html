@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #myCanvas{
+            border:1px solid red;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="root">
+        <canvas id="myCanvas" width="500" height="500"></canvas>
+    </div>
+    <script>
+        function draw() {
+            let c = document.getElementById("myCanvas") ;
+            let ctx = c.getContext("2d") ;
+            for(let i = 0 ; i < 10; i++){ //行
+                for(let j = 0; j < 10; j++){ //列
+                    // ctx.fillStyle = randomColor() ;
+                    // ctx.fillRect( j * 50, i * 50, 50, 50) ;
+                    ctx.strokeStyle = randomColor() ;
+                    ctx.strokeRect( j * 50, i * 50, 40, 40) ;
+                }
+            }
+        }
+        function randomColor() {
+            return 'rgb(' + Math.floor(Math.random()*256) + ',' +
+                Math.floor(Math.random()*256) + ',' + Math.floor(Math.random()*256) + ')';
+        }
+        draw() ;
+    </script>
+</body>
+</html>

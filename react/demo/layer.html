@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            width:100%;
+            height: 100%;
+        }
+        #modal{
+            display: none;
+            position: fixed;
+            top:0;
+            bottom: 0;
+            width:100%;
+            background: black;
+            opacity: 0.5;
+        }
+        #box{
+            position: absolute;
+            bottom: 0;
+            width:100%;
+            height: 0px;
+            background: gold;
+            transition: height 2s;
+        }
+        .switch{
+            position: relative;
+            margin:30px auto;
+            padding: 0 20px;
+            width: 100px;
+            height:20px;
+            text-align: center;
+            background: whitesmoke;
+            border-radius: 5px;
+        }
+        #slide{
+            position: absolute;
+            left:10px;
+            width: 50px;
+            border-radius: 10px;
+            background: pink;
+            color: white;
+            transition: all 1s;
+        }
+
+
+    </style>
+    <script>
+        window.onload = function () {
+
+        };
+        function showModal(){
+            let oModal = document.getElementById("modal");
+                oModal.style.display = "block" ;
+            let oBox = document.getElementById("box");
+                oBox.style.height = "200px" ;
+        }
+        function hideModal() {
+            let oModal = document.getElementById("modal");
+                oModal.style.display = "none" ;
+            let oBox = document.getElementById("box");
+                oBox.style.height = "0px";
+        }
+        function slideLeft() {
+            let oSlide = document.getElementById("slide");
+            if(oSlide.style.left == "10px")  return;
+                oSlide.style.left = "10px" ;
+                oSlide.innerText = "空闲" ;
+        }
+        function slideRight() {
+            let oSlide = document.getElementById("slide");
+            if(oSlide.style.left == "75px")  return;
+                oSlide.style.left = "75px" ;
+                oSlide.innerText = "就餐" ;
+        }
+
+        function getStyle(node,styleType){
+            return node.currentStyle ? node.currentStyle [styleType]: getComputedStyle(node)[styleType];
+        }
+    </script>
+</head>
+<body>
+    <div class="root">
+        <button onclick="showModal()">弹出层</button>
+        <div id="modal" onclick="hideModal()"></div>
+        <div id="box">
+            <div class="switch">
+                <div id="slide">空闲</div>
+                <span style="display: block;float: left" onclick="slideLeft()" id="left">空闲</span>
+                <span style="display: block;float: right" onclick="slideRight()" id="right">就餐</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		body,html{
+			height:100%;
+		}
+		section{
+			width:100%;
+			height:100%;
+			background:#007fd5;
+			animation: bg 20s linear infinite;
+			overflow: hidden;
+			display:block;
+			position:relative;
+		}
+		section div{
+			width:300%;
+			height:100%;
+			position:absolute;
+			left:0;
+			top:0;
+		}
+		section div:nth-child(1){
+			background:url(image/cloud_one.png);	
+			animation: play 50s linear infinite;
+		}
+		section div:nth-child(2){
+			background:url(image/cloud_two.png);	
+			animation: play 75s linear infinite;
+		}
+		section div:nth-child(3){
+			background:url(image/cloud_three.png);	
+			animation: play 100s linear infinite;
+		}
+		/* 改变天气的颜色动画 */
+		@keyframes bg{
+			0%{
+				background: #007fd5;
+			}
+			50%{
+				background: #000;
+			}
+			100%{
+				background: #007fd5;
+			}
+		}
+		/* 让第一块云彩动起来 */
+		@keyframes play{
+			0%{
+				left:0;
+			}
+			100%{
+				left:-200%;
+			}
+		}
+	</style>
+</head>
+<body>
+	<section>
+		<div></div>
+		<div></div>
+		<div></div>
+	</section>
+</body>
+</html>

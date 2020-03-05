@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="root">
+
+    </div>
+    <script type="text/javascript">
+        let obj = {
+            template: '<div>Hello World</div>',
+            created() {
+                this.showName() ;
+            },
+            methods:{
+                showName(){
+                    console.log( "Obj Rainy ") ;
+                }
+            }
+        };
+        let Component = Vue.extend({
+            mixins: [obj]
+        });
+        new Component();
+
+        Vue.component('todo-item',{
+            props:['message'],
+            template: ``,
+            data:function () {
+                return{
+                    name: 'Rainy',
+                    user: 'AA'
+                }
+            },
+
+        });
+        new Vue({
+            el: "#root",
+        })
+
+    </script>
+</body>
+</html>

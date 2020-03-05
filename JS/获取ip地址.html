@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="root">
+
+    </div>
+    <script>
+            function Father( name){
+                this.name = name ;
+            }
+            Father.prototype.sayFather = function () {
+                console.log("Father:",this.name ) ;
+            };
+
+            function Son( name, age) {
+                Father.call(this, name) ;
+                this.age = age ;
+            }
+
+
+            let prototype = Object.create(Father.prototype) ;
+                // prototype.constructor = Son ;
+                Son.prototype = prototype ;
+
+            Son.prototype.saySon = function () {
+                console.log("Son:",this.age) ;
+            };
+
+
+            let son = new Son("Rainy", 18) ,
+                father = new Father("cc");
+
+            console.log([]);    
+            console.log(typeof son);
+            console.log(son instanceof Father);
+            console.log(son instanceof Son);
+
+
+
+
+
+    </script>
+</body>
+</html>

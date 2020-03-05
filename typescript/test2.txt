@@ -1,0 +1,250 @@
+1，Number
+            new Number(value) ;
+        属性：  NaN
+                MAX_VALUE
+                MIN_VALUE
+                NEGATIVE_INFINITY   //负无穷大
+                POSITIVE_INFINITY   //正无穷大
+                prototype           //Number对象的静态属性，使您有能力向对象添加 属性和方法
+                constructor         //返回对创建此对象的 Number 函数的引用。
+        1, prototype
+                function employee(id:number,name:string) {
+                    this.id = id
+                    this.name = name
+                }
+                var emp = new employee(123,"admin")
+                employee.prototype.email = "admin@runoob.com"
+        方法：
+            toFixed() //把数字转换为字符串，并对小数点指定位数。
+            toLocaleString() //把数字转换为字符串，使用本地数字格式顺序。
+            toPrecision() //把数字格式化为指定的长度。  123.12.toPrecision()  = 123.12
+            toString() //把数字转换为字符串，使用指定的基数。数字的基数是 2 ~ 36 之间的整数。若省略该参数，则使用基数 10。
+2，String
+            new String(value) ;
+         属性： constructor //对创建该对象的函数的引用。
+                length
+                prototype  //同上
+         方法：
+                chatAt()  //返回指定位置的字符  str.chatAt(0)
+                chatCodeAt()  //返回指定位置的字符编码
+                concat()   //拼接
+                indexOf()   lastIndexOf()
+                match() 	replace() search()
+                slice() 	split() substr() substring()
+3，数组
+        var array_name[:datatype];        //声明   string number any ..
+        array_name = [val1,val2,valn..]   //初始化
+        var array_name[:data type] = [val1,val2…valn]
+
+        解构：
+            let arr: number[] = [12, 13] ;
+            let [x, y] = arr
+        多维数组：
+            let arr: number | string | any [][] = [ [1,2], [3] ]
+        函数中的使用
+            let arr:string[] = ["rain"] ;
+            function(arr:string[]){}
+        函数的返回值
+            function rainy(){  return new Array() }
+        方法：
+                concat()every() filter()forEach()map()indexOf()join()
+                pop() push() reduce() reverse() shift() unshift() slice() some()
+                sort() toString()
+4，元祖
+        1. 已知元素的数量和类型的 数组
+        2，typescript 数组中类型都是一致的。如果不相一致，需元祖上场
+            let arr = [1, "w"]
+        更新元祖
+            arr[0] = xx
+        解构元祖
+            let [b,c] = arr ;
+5，联合类型
+        通过管道符  | 将变量设置多种类型，赋值时可以根据类型进行设置
+        let other: string | number ;
+        1, 形参
+                function rainy(name: string | string[]) {}
+6, 接口
+            interface  相当于一种规范 。只要定义了一些东西，必须使用。
+
+        接口是一系列抽象方法的声明，是一些方法特征的集合，这些方法都应该是抽象的，需要由具体的类去实现，
+        然后第三方就可以通过这组抽象方法调用，让具体的类执行具体的方法。
+        1, interface interface_name {
+            first_name: string ,
+            alia_name: string,
+            sayHi: ()=> number ,  //定义方法
+            commandline:string[]|string|(()=>string);  //联合类型和接口
+        }
+        2，接口和数组
+            interface namelist {
+               [index:number]:string
+            }
+            let show:namelist ;
+                show[0] = 字符串  //必须是字符串
+        3，接口继承
+            单接口继承：
+                interface son_interface extends father_interface
+            多接口继承： 继承的各个接口使用逗号 , 分隔。
+                interface son_interface extends father_interface, grandfather_interface , ...
+        4, 使用方法：
+            1, let person : interface_name = { //一般用这个
+                    属性、方法
+                    sayJ: () => {}
+                }
+            2, let time = <Son>{} ;
+            3, class Rainy implements IShape{}
+7，类
+    class className{
+        字段          //声明的变量
+        构造函数      //类实例化时调用，可以为类的对象分配内存
+        方法          //方法为对象要执行的操作
+    }
+    class Rainy{
+        name:string ;
+        constructor(aff_name: string){
+            this.name = aff_name ; //this.name 指 声明的name
+        }
+        showHi():void{
+            console.log("我的名字：", this.name) ;
+        }
+    }
+    继承：
+        1，子类除了不能继承父类的私有成员（属性和方法），其他都可以继承。
+            class Son extends Father {}
+        2，只能继承一个类，不能继承多个类, 但支持多重继承
+            class GrandSon extends Son{}
+        3，继承类的方法重写
+            show(): number{
+                super.show() ;  //super 进行调用
+                return xx
+            }
+    static：
+        用于定义类的数据成员（属性和方法）为静态的
+        1, 调用方法：
+                类名.属性
+                类名.方法名()
+        class Rainy_M {
+            static name_a:string ;
+            constructor(str: string){
+                Rainy_M.name_a = str ;
+            }
+            static sayHi():void{
+                console.log("hello：",Rainy_M.name_a) ;
+            }
+        }
+    instanceof:
+        判断对象是否是指定的类型，返回Boolean
+    访问控制修饰符：
+        public          //公有，在任何地方都可以被访问
+        protected       //受保护，自身及其子类和父类访问。
+        private         //私有，自身访问，其他不可以
+    类和接口：
+        interface Load{}
+        class Rainy implements Load {}
+8，对象
+    1，包含键值对，值可以是标量、函数、数组、对象等。
+    var object_name = {
+        key1: "value1", // 标量
+        key2: "value",
+        key3: function() {
+            // 函数
+        },
+        key4:["content1", "content2"] //集合
+    }
+    2，鸭子类型
+        多态的一种形式。在不使用鸭子类型的语言中，我们可以编写一个函数，它接受一个类型为"鸭子"的对象，
+        并调用它的"走"和"叫"方法。在使用鸭子类型的语言中，这样的一个函数可以接受一个任意类型的对象，
+        并调用它的"走"和"叫"方法。如果这些需要被调用的方法不存在，那么将引发一个运行时错误。
+        任何拥有这样的正确的"走"和"叫"方法的对象都可被函数接受的这种行为引出了以上表述，
+        这种决定类型的方式因此得名。
+        interface IPoint {
+            x:number
+            y:number
+        }
+        function addPoints(p1:IPoint,p2:IPoint):IPoint {
+            var x = p1.x + p2.x
+            var y = p1.y + p2.y
+            return {x:x,y:y}
+        }
+        // 正确
+        var newPoint = addPoints({x:3,y:4},{x:5,y:1})
+        // 错误
+        var newPoint2 = addPoints({x:1},{x:4,y:3})
+9，命名空间
+        namespace, 解决重名问题。命名空间划分一定的区域，和其他区域相互不影响。
+        namespace SomeNameSpaceName {
+           export interface ISomeInterfaceName {      }
+           export class SomeClassName {      }
+        }
+        1，如果想调用 SomeNameSpaceName的类或接口，使用 export 关键词
+        2，在另外的空间使用 SomeNameSpace.SomeClassName ;
+        3，如果命名空间在一个单独的文件下.ts, 使用/// 引用
+            /// <reference path="space.ts">
+
+            tsc --out app.js TestShape.ts
+            tsc --module amd d.ts
+            tsc --module commonjs d.ts
+            ...
+
+        5，总结思想：
+                1，定义 接口
+                2，创建 类 且属于接口
+                3，创建方法， 调用方法
+        6， 封装思想： 利用对象，将函数进行封装。
+
+        二、
+            嵌套命名空间
+                namespace space_name_1{
+                    export namespace space_name_2{
+                            export class Rainy{
+                                public count(){
+                                    return xxx
+                                }
+                            }
+                    }
+                }
+            调用：成员的访问使用·来实现。
+                let c = new space_name_1.space_name_2.Rainy() ;
+                    c.count() ;
+10，模块
+        1，概念：在其自身的作用域里，不是在全局作用域里。意为这：模块里的变量、函数、类
+                        在模块外部是不可见的，除非明确使用 export。因此：import导入
+        2，模块加载器
+                作用：在执行此模块前，加载该模块的所有依赖。
+        3，
+            // 文件名 : SomeInterface.ts
+            export interface SomeInterface {
+               // 代码部分
+            }
+
+            import someInterfaceRef = require("./SomeInterface"); //注意不加后缀
+11，声明文件
+        1，引入第三方库，可以直接引用调用库的类和方法。但无法使用类型检查
+        2，需要将这些库里的函数和方法体去掉后只保留导出类型声明，而产生了一个描述 JavaScript 库和模块信息的声明文件。
+            通过引用这个声明文件，就可以借用 TypeScript 的各种特性来使用库文件
+        3，declare
+                定义类型：declare var jQuery: (selector: string) => any;
+                            jQuery('#foo');
+        4，以 x.d.ts 文件命名
+                格式：
+                        declare module Module_name{}
+                引入：
+                        /// <reference path="xxx" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

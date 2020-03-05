@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        class Son extends React.Component{
+            constructor(props){
+                super(props)
+            }
+            trigger(){
+                this.props.func() ;
+            }
+            render(){
+                return(
+                    <div>
+                        <h2>
+                            Son >  origin Father Props : {this.props.money}
+                        </h2>
+                        <button onClick={this.trigger.bind(this)}>son按钮</button>
+                    </div>
+
+                )
+            }
+        }
+        class Father extends React.Component{
+            constructor(){
+                super() ;
+                this.state = {
+                    name: "FatherSate",
+                    money: 1000000
+                }
+            }
+            componentWillMount(){
+                console.log('componentWillMount');
+            }
+            componentWillReceiveProps(){
+                console.log('componentWillReceiveProps');
+                console.log(this);
+            }
+            componentWillUpdate(newProps,newState){
+                // console.log(newProps);
+                // console.log(newState);
+                console.log('componentWillUpdate');
+            }
+            changeData(){
+                console.log(this) ;
+                this.setState({
+                    name: "rainy",
+                    money: --this.state.money
+                }) ;
+            }
+            render(){
+                console.log('render');
+                return(
+                    <div>
+                        <h2>
+                            Father : {this.state.money} : {this.state.name}
+                        </h2>
+                        <Son func={this.changeData.bind(this)} money={this.state.money}/>
+                    </div>
+                )
+            }
+            componentDidMount(a){
+                console.log('componentDidMount');
+            }
+            componentDidUpdate(newProps,newState){
+
+                console.log('didUpdate');
+            }
+
+        }
+        ReactDOM.render(
+            <Father/>,
+            document.getElementById("root")
+        )
+            
+    </script>
+</body>
+</html>

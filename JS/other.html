@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>css3 实现幻灯片效果</title>
+    <style type="text/css">
+        #root {
+            /*position: absolute;*/
+        }
+
+        .div1 {
+            background-color: #6699FF;
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -100px;
+            margin-left: -100px;
+        }
+
+        #a {
+            width: 300px;
+            height: 300px;
+            background: pink;
+        }
+
+        #b {
+            width: 200px;
+            height: 200px;
+            background: blue;
+        }
+
+        #c {
+            width: 100px;
+            height: 100px;
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+<div id="root">
+    <div class="div1"></div>
+    <ul id="ul1">
+        <li>111</li>
+        <li>222</li>
+        <li>333</li>
+        <li>444</li>
+    </ul>
+    <div id="a">
+        <div id="b">
+            <div id="c"></div>
+        </div>
+    </div>
+    <script>
+        window.onload = function () {
+            // var oUl = document.getElementById("ul1");
+            // var aLi = oUl.getElementsByTagName('li');
+            // for (var i = 0; i < aLi.length; i++) {
+            //     aLi[i].onclick = function () {
+            //         alert(123);
+            //     }
+            // }
+
+            // var oUl = document.getElementById("ul1");
+            // oUl.onclick = function(ev){
+            //     // console.log(e.target);
+            //     var ev = ev || window.event;
+            //     var target = ev.target || ev.srcElement;
+            //     // alert(123);
+            //     if(target.nodeName.toLowerCase() == 'li'){
+            //         alert(123);
+            //         alert(target.innerHTML);
+            //     }
+            // }
+
+            var a = document.getElementById("a"),
+                b = document.getElementById("b"),
+                c = document.getElementById("c");
+            c.addEventListener("click", function (event) {
+                console.log("c1");
+                // 注意第三个参数没有传进 false , 因为默认传进来的是 false
+                //，代表冒泡阶段调用，个人认为处于目标阶段也会调用的
+            });
+            c.addEventListener("click", function (event) {
+                console.log("c2");
+            }, true);
+
+            b.addEventListener("click", function (event) {
+                console.log("b");
+            }, true);
+
+            a.addEventListener("click", function (event) {
+                console.log("a1");
+            }, true);
+            a.addEventListener("click", function (event) {
+                console.log("a2")
+            });
+            a.addEventListener("click", function (event) {
+                console.log("a3");
+                event.stopImmediatePropagation();
+            }, true);
+            a.addEventListener("click", function (event) {
+                console.log("a4");
+            }, true);
+        };
+
+        function stopPropagation(e) {
+            e = e || window.event;
+            if (e.stopPropagation) { //W3C 阻止冒泡方法
+                e.stopPropagation();
+            } else {
+                e.cancelBubble = true; //IE 阻止冒泡方法
+            }
+        }
+        document.getElementById('need_hide').onclick = function (e) {
+            stopPropagation(e);
+        }
+
+    </script>
+</div>
+</body>
+</html>

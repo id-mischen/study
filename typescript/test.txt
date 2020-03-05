@@ -1,0 +1,103 @@
+1， 安装、命令
+	npm install typescripts -g
+	tsc -v
+2，基础语法
+	1，组成：模块、函数、变量、语句和表达式、注释
+	2，typescript是一种面向对象的编程语言： 对象、类、方法
+	3，基础类型：
+		any、number 、string 、boolean、数组类型、元祖、枚举(enum)、void、null、undefined、never
+		1, 定义
+		    var [变量名] : [类型] = 值;
+		        name: any|number|string
+		        other: number[]          // 在元素类型后面加上[]
+		        other: [string , number] //元组类型用来表示已知元素数量和类型的数组，各元素的类型不必相同，对应位置的类型需要相同。
+		        enum Color { Red, Green} //枚举
+		        let c: Color = Color.Red
+
+		        void: 用于标识方法返回的数据类型，表示该方法没有返回值
+		        undefined、never：从不会出现的值
+		2，声明变量并初始值，但不设置类型类型，该变量可以是任意类型：即 any
+		3, 变量不要使用 name 否则会与 DOM 中的全局 window 对象下的 name 属性出现了重名。
+    3, 类型断言
+        1，以用来手动指定一个值的类型，即允许变量从一种类型更改为另一种类型。
+           <类型>值  | 值 as 类型
+           let str2:number = <number><any> str
+3，变量作用域
+    1，全局作用域、类作用域、局部作用域
+        var global_num = 12          // 全局变量
+        class Numbers {
+           num_val = 13;             // 类变量
+           static sval = 10;         // 静态变量
+           storeNum():void {
+              var local_num = 14;    // 局部变量
+           }
+        }
+4，运算符
+     1，和js 基本相同
+5, 函数
+    1，function function_name():return_type {
+            // 语句
+            return value;
+        }
+        return_type 是返回值的类型。
+        return 关键词后跟着要返回的结果。
+        一个函数只能有一个 return 语句。
+        返回值的类型需要与函数定义的返回类型(return_type)一致。
+
+   2，function func_name( param1 [:datatype], param2 [:datatype]) {
+
+        }
+        param1、param2 为参数名。
+        datatype 为参数类型。
+   3，可选参数、默认参数
+        1，在 TypeScript 函数里，如果我们定义了参数，
+            则我们必须传入这些参数，除非将这些参数设置为可选，可选参数使用问号标识 ？。
+        2, 可选参数必须跟在必需参数后面。
+        function show_info(name: string, age? : number = 0.4){
+            return name + age ;
+        }
+   4，剩余参数
+        function create_name(name: string, ...rest_name: string[]){
+            return name + rest_name ;
+        }
+        function create_name(name) {
+            var rest_name = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                rest_name[_i - 1] = arguments[_i];
+            }
+            return name + rest_name;
+        }
+        理解： 其他参数 组合成为一个数组。
+   5, 匿名函数
+        1，类似于JS的函数表达式
+        2，let msg = function (){}
+   6，函数重载
+        1，方法名字相同，而参数不同，返回的类型可以相同也可不同。
+        2，每个重载的方法必须有一个独一无二的参数类型列表
+
+        参数类型不同：
+            function disp(string):void;
+            function disp(number):void;
+        参数数量不同：
+            function disp(n1:number):void;
+            function disp(x:number,y:number):void;
+        参数类型顺序不同：
+            function disp(n1:number,s1:string):void;
+            function disp(s:string,n:number):void;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

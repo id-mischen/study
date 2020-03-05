@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>标题 - 函数节流</title>
+</head>
+<body>
+<div  style="height:150px;line-height:150px;text-align:center; color: #fff;background-color:#ccc;font-size:80px;"></div>
+<input type="text" id="content">
+<script>
+    let num = 1;
+    let content = document.getElementById('content');
+
+    function count() {
+        console.log("hello world") ;
+    };
+    function debounce(func, wait) {
+        let timeout;
+        return function () {
+            let context = this;
+            let args = arguments;
+            if (timeout) clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                func.apply(context, args)
+            }, wait);
+        }
+    }
+    content.oninput = debounce(function () {
+        console.log("hello world") ;
+    },1000);
+</script>
+</body>
+</html>

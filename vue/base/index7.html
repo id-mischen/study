@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
+<head>
+    <meta charset="UTF-8">
+    <title>Rainy</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="root">
+
+        <input type="text" v-model="name">
+        <h1>{{ name | capitalize }}</h1>
+        <h1>{{ name }}</h1>
+        <!--<h2 v-pin>cc</h2>-->
+    </div>
+    <script>
+
+
+
+       Vue.directive('pin', {
+           bind: function(el,binding, vnode){
+                console.log(el,binding,vnode) ;
+                el.style.position = "fixed" ;
+                el.style.top = binding.value  + 'px';
+           },
+           inserted: function (el) {
+               console.log(el) ;
+                el.focus() ;
+           }
+       }) ;
+
+
+       Vue.filter('capitalize',function(value){
+           console.log(value) ;
+           if (!value) return '';
+           value = value.toString();
+           return "CCCC";
+       });
+        let vm = new Vue({
+            el: '#root',
+            // mixins: [mixin],
+            data:{
+                message: "hello Vue",
+                name: 'Rainy'
+            },
+            methods:{
+                getMap(){
+                    console.log("Father method")
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

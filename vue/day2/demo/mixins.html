@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+
+    </div>
+    <script>
+        /*//定义一个混入对象
+        let myMixin = {
+            created(){
+              this.hello()
+            },
+            methods:{
+               hello(){
+                   console.log("hello world")
+               }
+            }
+        }
+        //定义一个使用混入对象的组件
+        let Component = Vue.extend({
+            mixins: [myMixin]
+        });
+        let component = new Component() ;*/
+
+        let myMixin = {
+            data:function () {
+                return{
+                    name: 'mischen',
+                    age: 19
+                }
+            },
+            created(){
+                console.log("hun aa");
+                this.showName();
+            },
+            methods:{
+                showName(){
+                    console.log("混合对象 hello")
+                }
+            }
+        };
+        new Vue({
+            mixins:[myMixin],
+            data:{
+                name: 'rainy',
+                sex: 'boy'
+            },
+            created(){
+                console.log(this.$data);
+                this.showName();
+            },
+            methods:{
+                showName(){
+                    console.log("组件 je")
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>

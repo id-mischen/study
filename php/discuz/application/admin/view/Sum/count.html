@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>统计-信息</title>
+</head>
+<body>
+<p>用户总数：{$user_sum} 文章总数：{$topic_sum} 评论总数：{$reply_sum} 点赞总数：{$praise_sum} </p>
+<table>
+    <tr>
+        <td>用户名</td>
+        <td>发表总数</td>
+        <td>详细信息</td>
+    </tr>
+    {volist name='publish_sum' id='publish'}
+    <tr>
+        <td>{$publish.name}</td>
+        <td>{$publish.topic_count}</td>
+        <td><a href="#">阅读更多</a> </td>
+    </tr>
+    {/volist}
+
+</table>
+
+</body>
+</html>

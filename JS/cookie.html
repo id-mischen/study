@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        /* 怪异盒模型  width = content + border */
+        /*body{*/
+            /*box-sizing: border-box;*/
+        /*}*/
+        /*.box{*/
+            /*width: 100px;*/
+            /*height: 100px;*/
+            /*border:1px solid red;*/
+            /*padding: 10px ;*/
+            /*margin: 30px;*/
+        /*}*/
+        img{
+            /*width: 100px;*/
+            /*height: 100px;*/
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <div class="box"></div>
+        <img src="banner/banner_1.jpg" data-src="banner/banner_2.jpg" />
+        <img src="default.jpg" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+    </div>
+    <script>
+        function setCookie(name,value,days) { // 设置cookie days设置过期时间 单位:天 不传默认是 cookie 在浏览器关闭时删除
+            var exp = new Date();
+            exp.setTime(exp.getTime() + days*24*60*60*1000);
+            document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+        }
+        function getCookie(name) { // 获取一个cookie
+            var strCookie = document.cookie;
+            var arr = strCookie.split(';');
+            for (var i = 0; i < arr.length; i++) {
+                var t = arr[i].split("=");
+                if(t[0] == name) {
+                    return t[1];
+                }
+            }
+            return null;
+        }
+        function clearCookie(name) {
+            setCookie(name, "", -1);
+        }
+        setCookie("name","Rainy",2) ;
+        console.log(getCookie("name"));
+        clearCookie("name","", -1) ;
+        console.log(getCookie("name"));
+
+
+
+
+    </script>
+</body>
+</html>

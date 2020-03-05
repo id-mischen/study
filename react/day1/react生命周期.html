@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React 生命周期</title>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+        class Father extends React.Component{
+            constructor(){
+                super();
+                this.state = {
+                    name : "Father",
+                    age: 19
+                }
+            }
+            render(){
+                return(
+                    <div className="father">
+                        { this.state.age }
+                        <Son name={this.state.name} age={ this.state.age }></Son>
+                    </div>
+                )
+            }
+        }
+        class Son extends  React.Component{
+            static defaultProps = {
+                //1、加载默认属性
+                name: 'sls',
+                age:23
+            };
+            /**
+             * @props 父组件data
+             * @context
+             * */
+            constructor(props , context){
+                super(props,context) ;
+
+                this.state = {
+                    name : "mischen"
+                };
+                this.userName = {
+                    name: 'CC'
+                }
+            }
+            /**
+             * 装载阶段
+             * */
+            componentWillMount( ){
+                this.state.name = "willMount  edit";
+            }
+            componentDidMount(  ){
+                console.log("componentDidMount");
+            }
+            /**
+             * 更新阶段
+             * */
+            componentWillReceiveProps( new_props){
+                console.log("receive: ",new_props);
+                console.log("componentWillReceiveProps");
+            }
+            shouldComponentUpdate( newProps, newState){
+                // console.log( newProps, newState) ;
+                console.log("shouldComponentUpdate");
+                return true
+            }
+            componentWillUpdate( newProps,newState){
+                console.log( newProps,newState);
+                console.log("componentWillUpdate");
+            }
+            componentDidUpdate( oldProps,oldState){
+                console.log(oldProps,oldState);
+                console.log("componentDidUpdate");
+            }
+
+            /**
+             * 事件
+             * */
+            handleClick(){
+                this.setState({
+                    name: "rainy"
+                })
+            }
+            render(){
+                return(
+                    <div>
+                        <h2> Son name: { this.state.name }</h2>
+                        <h2> User name: { this.userName.name }</h2>
+                        <h2> Props name: { this.props.name }</h2>
+                        <h2> Default props： { this.props.age }</h2>
+                        <button onClick={ this.handleClick.bind(this)} >按钮</button>
+                    </div>
+                )
+            }
+        }
+        Son.defaultProps = {
+            age: "18"
+        };
+       /* function show(){
+            console.log(element);
+        }
+        const element = (
+            <div>
+                <h1> hello world </h1>
+                <button onClick={ show}>查看元素</button>
+            </div>
+        );*/
+        ReactDOM.render(
+            <Father/>,
+            document.getElementById("example")
+        )
+            
+    </script>
+</body>
+</html>

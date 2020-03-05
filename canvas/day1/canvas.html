@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0 ;
+            margin: 0 ;
+        }
+        #root{
+            width: 60%;
+            margin: 5% auto;
+        }
+        #myCanvas{
+            border:1px solid blue ;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <canvas id="myCanvas" width="500" height="500"></canvas>
+    </div>
+    <script>
+        let c = document.getElementById("myCanvas") ;
+        let ctx = c.getContext("2d") ;
+        //公共样式
+        // ctx.lineWidth = "10" ;
+        ctx.strokeStyle = "blue" ;
+        ctx.fillStyle = "red" ;
+
+        //矩形
+        ctx.beginPath();
+        ctx.moveTo( 10, 10);
+        ctx.lineTo( 110, 10) ;
+        ctx.lineTo( 110, 120) ;
+        ctx.lineTo( 10, 120) ;
+        ctx.closePath() ;
+        ctx.stroke() ;
+        ctx.fill() ;
+        ctx.save() ;
+
+        //矩形 -空心
+        ctx.translate(120, 120) ;
+        ctx.lineWidth = "2" ;
+        ctx.strokeRect( 0, 0, 100, 100) ;
+        ctx.font = "20px Arial" ;
+        ctx.textAlign = "left" ;
+        ctx.strokeText("hello world", 10, 10) ;
+        ctx.stroke() ;
+
+        //矩形- 实心
+        ctx.translate(20, 20) ;
+        ctx.fillStyle = "gold" ;
+        ctx.fillRect( 0, 0, 100, 100) ;
+
+        //圆
+        ctx.arc(0,0 , 50, 0, 10) ;
+        ctx.stroke() ;
+
+
+
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+
+
+解析规则： 由下而上，由后置前
+
+解析React
+1, npm i babel-loader babel-preset-env babel-core babel-preset-react -D
+
+解析css
+1. npm i css-loader style-loader -D
+
+解析sass
+1. npm i style-loader css-loader sass-loader node-sass
+
+解析图片
+1. npm i url-loader file-loader -D
+
+{
+    test: /\.(css|sass)$/,
+    loader: '',
+    或者
+    use:{
+        loader: '',
+        options:{
+
+        }
+    }
+}
+

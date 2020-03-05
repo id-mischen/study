@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue双向绑定</title>
+</head>
+<body>
+    <div id="root">
+        <h1>{{title}}</h1>
+        <div class="box">
+            I am Box
+        </div>
+        <div>
+            <p>
+                <input type="text" v-model="username" name="username">
+            </p>
+            <p> {{username}}</p>
+            <p>{{nav.path}}</p>
+        </div>
+    </div>
+    <script src="./js/mvvm.js"></script>
+    <script src="./js/observer.js"></script>
+    <script src="./js/compile.js"></script>
+    <script src="./js/watcher.js"></script>
+    <script>
+        let vm = new MVVM({
+            el: '#root',
+            data:{
+                title: '双向绑定',
+                username: 'Rainy',
+                nav:{
+                    path:'/index'
+                },
+            }
+        });
+        console.log(vm);
+        window.setTimeout(function () {
+
+        },2000)
+    </script>
+</body>
+</html>

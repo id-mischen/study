@@ -1,0 +1,210 @@
+1，  let data ={ ...data.id, data.address }  //只合并相同一项
+     let data  = [ data.id, data.address ]  //合并全部
+
+2，判断一个对象是否为空
+	JSON.stringify(data) == "{}"
+3，
+    function unique (arr) {
+  	    return Array.from(new Set(arr))
+    }  //不会改变原数组，生成新数组
+
+4，element
+	form表单规则验证
+	prop 必须和 v-model绑定的字段名一致、
+
+5，vue多文件上传
+	1，formData()
+	2，所有属性循环添加 append
+	3,   多图上传： 变为数组，  formData.append(key + '[]', that.goodForm[key][i]['raw']) ;
+		 注意 ：[] ,用来后端识别数组必须加
+	4，头部 header :  'Content-Type':'multipart/form-data'
+	5, qs.string()  //序列化  --->细细研究
+
+6，localStorage.setItem(key, value)
+	1, 不能存储对象
+	2，用JSON.stringify()  ---> JSON.parse() ;
+
+7， return 相当于 结束函数，所有程序、
+
+8，
+	var Rainy = /** @class */ (function () {
+        function Rainy() {
+            this.kind_name = 'class_chen'; //类变量
+        }
+        Rainy.prototype.show_name = function () {
+            var local_name = "local_chen"; //局部变量
+        };
+        Rainy.s_name = 's_chen'; //静态变量
+        return Rainy;
+    }());
+	闭包保证数据的纯净
+9，
+	console.log(str.slice(1, 3)) ;		// start end    数组中返回选定的元素
+	console.log(str.substr(1, 3)) ;		// start length
+	console.log(str.substring(1, 3)) ;		// start stop   两个指定下标之间的字符。
+
+10， [] === []  --> false
+	指向的地址不一样,引用类型的数据，比较的是地址，而不是真实的值。
+
+	console.log( [] == ![] )  // true
+	console.log( {} == !{} )  // false
+    console.log(null == undefined) ; //true
+
+    null、undefined、NaN以及空字符串('')取反都为true，其余都为false。
+
+	相等和不相等——先转换再比较      （==）  强制转换
+    全等和不全等——仅比较而不转换  （===）
+
+
+1, new Set()  new Map()
+    set数据结构：类似于数组，但是成员的值都是唯一的，没有重复的值
+    1，去重
+        function unique(arr){
+            const s = new Set(arr)
+             //arr.forEach( item => s.add(item) )
+                 add() 方法 不会重复添加成员
+            return [...s] ;
+
+            [...new Set(array)] ;
+        }
+    2, set具有以下属性
+        Set.prototype.constructor：构造函数，默认就是Set函数。
+        Set.prototype.size：返回Set实例的成员总数。
+        Set 实例的方法分为两大类：操作方法（用于操作数据）和遍历方法（用于遍历成员）。下面先介绍四个操作方法。
+
+        Set.prototype.add(value)：添加某个值，返回 Set 结构本身。
+        Set.prototype.delete(value)：删除某个值，返回一个布尔值，表示删除是否成功。
+        Set.prototype.has(value)：返回一个布尔值，表示该值是否为Set的成员。
+        Set.prototype.clear()：清除所有成员，没有返回值。
+
+1，Proxy
+	用于修改某些操作的默认行为，等同于在语言层面做出修改，
+	所以属于一种“元编程”（meta programming），即对编程语言进行编程。
+
+	1，在目标对象之前设一层“拦截”。
+	2，用法  let show = new Proxy( target, handler)  ,target参数表示所要拦截的目标对象，
+		handler参数也是一个对象，用来定制拦截行为
+
+	var obj = new Proxy({}, {
+		get: function (target, key, receiver) {
+		    console.log(`getting ${key}!`);
+		    return Reflect.get(target, key, receiver); // 拦截返回 不变- 反射
+		},
+		set: function (target, key, value, receiver) {
+		   console.log(`setting ${key}!`);
+		   return Reflect.set(target, key, value, receiver);
+		}
+	});
+
+	作用：在元编程下拦截 进行添加删除等操作
+	let proxy = new Proxy({}, {
+		get: function(target, property){
+			return 35
+		}
+	})
+	let obj = Object.create(proxy) ;
+	obj.time // 35
+
+2，拦截函数
+	var handler = {
+	    get: function(target, name) {
+	        console.log("get") ;
+	        if (name === 'prototype') {
+	            return Object.prototype;
+	        }
+	        return 'Hello, ' + name;
+	    },
+
+	    apply: function(target, thisBinding, args) { //目标函数  undefined  参数
+	        console.log("apply") ;
+	        console.log(target,thisBinding,args) ;
+	        return Reflect.apply(target, thisBinding, args);
+	        // return target;
+	    },
+
+	    construct: function(target, args) {
+	        console.log("construct") ;
+	        return {value: args[1]};
+	    }
+	};
+
+	var fproxy = new Proxy(function(x, y) {
+	    return x + y;
+	}, handler);
+
+	fproxy(1,2)  		//运行触发 apply
+	new fproxy(1, 2)    //运行触发 construct
+	fproxy.prototype    //运行触发  get
+
+3， 拦截操作 - 13种
+	get(target, propKey, receiver)：拦截对象属性的读取，比如proxy.foo和proxy['foo']。
+	set(target, propKey, value, receiver)：拦截对象属性的设置，比如proxy.foo = v或proxy['foo'] = v，返回一个布尔值。
+	has(target, propKey)：拦截propKey in proxy的操作，返回一个布尔值。
+	deleteProperty(target, propKey)：拦截delete proxy[propKey]的操作，返回一个布尔值。
+	ownKeys(target)：拦截Object.getOwnPropertyNames(proxy)、Object.getOwnPropertySymbols(proxy)、Object.keys(proxy)、for...in循环，返回一个数组。该方法返回目标对象所有自身的属性的属性名，而Object.keys()的返回结果仅包括目标对象自身的可遍历属性。
+	getOwnPropertyDescriptor(target, propKey)：拦截Object.getOwnPropertyDescriptor(proxy, propKey)，返回属性的描述对象。
+	defineProperty(target, propKey, propDesc)：拦截Object.defineProperty(proxy, propKey, propDesc）、Object.defineProperties(proxy, propDescs)，返回一个布尔值。
+	preventExtensions(target)：拦截Object.preventExtensions(proxy)，返回一个布尔值。
+	getPrototypeOf(target)：拦截Object.getPrototypeOf(proxy)，返回一个对象。
+	isExtensible(target)：拦截Object.isExtensible(proxy)，返回一个布尔值。
+	setPrototypeOf(target, proto)：拦截Object.setPrototypeOf(proxy, proto)，返回一个布尔值。如果目标对象是函数，那么还有两种额外操作可以拦截。
+	apply(target, object, args)：拦截 Proxy 实例作为函数调用的操作，比如proxy(...args)、proxy.call(object, ...args)、proxy.apply(...)。
+	construct(target, args)：拦截 Proxy 实例作为构造函数调用的操作，比如new proxy(...args)。
+4，合并数组
+	let arr  = [...arr_1, ...arr_2] ;
+	let arr =  arr_1.push(...arr_2) ;
+5, 随意比较大小
+	let num = '5' ;
+	if(num > 5) ----可以进行比较，但是不能进行相加
+
+6，Object.defineProperty()
+	作用: 直接在一个对象上定义一个新属性，或者修改一个已经存在的属性
+	1,   obj 需要定义属性的当前对象
+	2，prop当前需要定义的属性名
+	3，desc属性描述符  通过描述符的设置可以进行更精准的控制对象属性
+
+	Object.defineProperty( data, key ,{
+	    value: '',
+	    writable: true, //是否可以改变
+	    enumerable: false,
+
+		get(){},
+		set(){}
+	})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

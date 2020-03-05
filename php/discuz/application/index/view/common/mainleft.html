@@ -1,0 +1,42 @@
+<div id="main" class="main-container container">
+    <div class="users-show">
+        <div class="col-md-3 box">
+            <div style="text-align: center;">
+                <img src="__UPLOADS__/{$show_img->url}" class="img-thumbnail users-show-avatar upload-btn" style="width: 206px;margin: 4px 4px 15px;min-height:190px;cursor: pointer;">
+            </div>
+
+            <dl class="dl-horizontal">
+
+
+                    <!--用volist解析不出来-->
+                {empty name='user'}错误
+                {else/}
+                <dt><lable>&nbsp; </lable></dt><dd> ID {$user.id}</dd>
+                <dt><label>用户名:</label></dt><dd><strong>{$user.name}</strong></dd>
+                <dt><label>注册:</label></dt>
+                <dd><span><?=date('Y-m-d H:i:s',$user->created_at)?></span></dd>
+
+                {/empty}
+            </dl>
+
+            <div class="clearfix"></div>
+            <a class="btn btn-primary btn-block" href="#" id="">
+                <i class="fa fa-edit"></i> 个人设置
+            </a>
+            <a class="btn btn-success btn-block" href="###" id="user-edit-button">
+                <i class="fa fa-github"></i> 绑定 Github 账号
+            </a>
+
+        </div>
+
+        <div class="col-md-9 left-col">
+
+            <div class="panel panel-default">
+
+                <div class="panel-body ">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li><a href="__ROOT__/infor/show">个人信息</a> </li>
+                        <li ><a href="__ROOT__/infor/updatedata">修改信息</a></li>
+                        <li ><a href="__ROOT__/infor/avatar">头像</a></li>
+                        <li><a href="__ROOT__/infor/password">密码</a></li>
+                    </ul>

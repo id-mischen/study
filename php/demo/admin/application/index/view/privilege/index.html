@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>权限管理</title>
+    {include file="public/header"/}
+</head>
+<body>
+    {notempty name="$Think.session.success"}
+    <div class="alert alert-info">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        {$Think.session.success}
+    </div>
+    {/notempty}
+<form class="form-inline" role="form">
+    <div class="form-group">
+        <label class="form-label">&nbsp;查询:</label>
+        <input type="text" class="form-control" name="name">
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary">查询</button>
+    </div>
+    <div class="form-group">
+        <button type="button" class="btn btn-info" id="add">添加</button>
+    </div>
+</form>
+<p>
+<table class="table table-hover table-bordered table-striped" width="100%">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>权限名称</th>
+        <th>模块名称</th>
+        <th>控制器名称</th>
+        <th>方法名称</th>
+        <th>创建时间</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <?php foreach($data as $datak=>$datav):?>
+    <tr>
+        <td>{$datav.id}</td>
+        <td><?php echo str_repeat("-----",$datav["level"]);?>{$datav.name}</td>
+        <td>{$datav.module_name}</td>
+        <td>{$datav.controller_name}</td>
+        <td>{$datav.action_name}</td>
+        <td>{$datav.create_time}</td>
+        <td width="10%" style="text-align: center;">
+            <button class="btn btn-sm btn-primary edit"  _attr="{$datav.id}">编辑</button>
+            <button class="btn btn-sm btn-danger del" _attr="{$datav.id}">删除</button>
+        </td>
+    </tr>
+    <?php endforeach;?>
+</table>
+</p>
+</body>
+</html>
+<script>
+    var indexinfo = (function () {
+        var addView = "{:URL('index/Privilege/addView')}";
+        var addUrl = "{:URL('index/Privilege/add')}";
+        var saveView="{:URL('index/Privilege/saveView')}";
+        var saveUrl="{:URL('index/Privilege/save')}";
+        var delView="{:URL('index/Base/delConfirm')}";
+        var delUrl="{:URL('index/Privilege/del')}";
+        return {
+            addUrl: addUrl,
+            addView: addView,
+            saveView:saveView,
+            saveUrl:saveUrl,
+            delView:delView,
+            delUrl:delUrl
+        };
+    })();
+</script>
+<script src="/static/js/logic/privilege.js"></script>

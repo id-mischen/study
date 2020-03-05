@@ -1,0 +1,5 @@
+/* components/header.wxss */
+
+.br{
+    margin: 20px;
+}

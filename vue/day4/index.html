@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="./node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+</head>
+<body>
+    <div id="root">
+        <!--<h2>{{ message }}</h2>
+        <h2>翻转：{{ reverseMessage }}</h2>-->
+        <h3>first_name: {{ first_name }}</h3>
+        <h3>last_name: {{ last_name }}</h3>
+        <h3>full_name: {{ full_name }}</h3>
+    </div>
+    <script>
+
+        let vm = new Vue({
+            el: "#root",
+            data: {
+                // message: 'Rainy'
+                first_name: 'Rainy',
+                last_name: 'mis_)',
+                // full_name: 'Rainy mis_)'
+            },
+            computed: {
+                /*翻转message*/
+                /*reverseMessage: function (){
+                  console.log("1") ;
+                  console.log(Date.now()) ;
+                  return this.message.split("").reverse().join("") ;
+                },*/
+                /*full_name: function (a, b){
+                    console.log(this) ;
+                    // return this.first_name + this.last_name ;
+                }*/
+                /*full_name: {
+                    get: function () {
+                        console.log("full_name: get") ;
+                        console.log(this) ;
+                        return this.first_name ;
+                    },
+                    set: function (newValue) {
+                        console.log("full_name: set") ;
+                        console.log("c",newValue) ;
+                        return this.first_name ;
+                    }
+                }*/
+
+            },
+            // watch:{
+            //   first_name: function ( val , b) {
+            //       console.log(val, b) ;
+            //       this.full_name = val + this.last_name ;
+            //   },
+            //   last_name: function (val ,b) {
+            //       console.log(val, b) ;
+            //       this.full_name = this.first_name + val ;
+            //   }
+            // },
+            method:{
+
+            }
+        });
+
+
+
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

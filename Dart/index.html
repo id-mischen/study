@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .nav{
+            display: flex;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+        }
+        .nav div{
+            border:1px solid red;
+            width: 40%;
+
+        }
+        .content{
+
+        }
+        .box{
+            height: 1000px;
+            border:1px solid gold;
+        }
+        .box2{
+            height: 1000px;
+            border:2px solid saddlebrown;
+            display: none;
+        }
+        .box3{
+            height: 200px;
+            border:10px solid rebeccapurple;
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="root">
+        <div class="nav">
+            <div>视频</div>
+            <div id="test">音乐</div>
+        </div>
+        <div class="content">
+            <!-- 视频-->
+            <div class="box"></div>
+            <!-- 占位盒子-->
+            <div class="box3"></div>
+            <!-- 音乐-->
+            <div class="box2"></div>
+        </div>
+    </div>
+    <script>
+        window.onload = function(){
+            let oId = document.getElementById('test') ,
+                oBox = document.getElementsByClassName('box')[0],
+                oBox2 = document.getElementsByClassName('box2')[0],
+                oBox3 = document.getElementsByClassName('box3')[0];
+                oId.addEventListener('click',function () {
+
+                    oBox.style.display = "none" ;
+                    /* 占位盒子，滚动条消失，原因：视图没溢出容器  */
+                    oBox3.style.display = "block" ;
+
+                    setTimeout(function () {
+                        /* 真是视图出现 ，消除占位盒子*/
+                        oBox2.style.display = "block" ;
+                        oBox3.style.display = "none" ;
+
+                    }, 100)
+                })
+        };
+    </script>
+</body>
+</html>

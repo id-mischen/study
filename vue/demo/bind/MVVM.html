@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="root">
+        <h1 id="name"> {{ name }}</h1>
+
+    </div>
+    <script src="observer.js"></script>
+    <script src="compile.js"></script>
+    <script src="wather.js"></script>
+    <script src="mvvm.js"></script>
+    <script>
+        let ele = document.querySelector("#name");
+        let vm = new MVVM({
+            name: 'hello world',
+        }, ele, 'name');
+        window.setTimeout(function () {
+            console.log(vm);
+            vm.name = 'mischen'
+        },2000);
+
+
+
+
+    </script>
+</body>
+</html>

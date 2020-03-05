@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>技术论坛</title>
+    <link rel="stylesheet" href="__STATIC__/css/all-df86af5803.css">
+</head>
+<body class="forum" data-page="forum">
+<div class="header">
+    <nav class="navbar navbar-inverse navbar-fixed-top navbar-default">
+        <div class="container">
+            <div class="navbar-header" id="navbar-header">
+                <a href="index.html" class="navbar-brand"><img src="__STATIC__/images/logo.png">
+                </a>
+            </div>
+            <div id="main-nav-menu">
+                <ul class="nav navbar-nav" >
+                    <li ><a href="__ROOT__/Topic/index"><i class="fa fa-home"></i> <span class="hidden-xs hidden-sm">首页</span></a></li>
+                    <li class="hidden-sm hidden-xs"><a href="__ROOT__/Tag/newtagsort/id/0"><i class="fa fa-comments-o"></i> 标签</a></li>
+                    {empty name='user'}
+                        <li></li>
+                    {else/}
+                    <li class="hidden-sm hidden-xs"><a href="__ROOT__/Mytopic/metopic"><i class="fa fa-comments-o"></i> 我的文章</a></li>
+                    <li class="hidden-sm hidden-xs"><a href="__ROOT__/Myinform/meinform"><i class="fa fa-comments-o"></i> 我的通知</a></li>
+                    <li class="hidden-sm hidden-xs"><a href="__ROOT__/Myinform/meintegrl"><i class="fa fa-comments-o"></i> 我的积分</a></li>
+                    {/empty}
+                </ul>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-search hidden-xs hidden-sm">
+                    <form method="POST" action="__ROOT__/topic/search"  class="navbar-form form-search active" target="_self">
+                        <div class="form-group">
+                            <input placeholder="搜索" class="form-control" name="keyword" type="search">
+                        </div>
+                        <i class="fa fa-search"></i>
+                    </form>
+                </li>
+                {empty name='user'}
+                <li class="active"><a href="__ROOT__/index/register" id="signup-btn">注册</a></li>
+                <li ><a href="__ROOT__/index/login" id="login-btn">登录</a></li>
+
+                <!--如果session为空时显示上面，否则显示下面.-->
+                <!--注意{要加$}-->
+                {else/}
+                <li>
+                    <ul class="nav user-bar navbar-nav navbar-right" style="margin-top:15px">
+
+                        <a href="#" style="margin-right:5px;"> {$user.name}</a>
+                        <a href="__ROOT__/infor/show" style="margin-right:5px;"> 个人设置</a>
+
+                        <a href="__ROOT__/index/logout" style="margin-right:5px;"> 退出</a>
+
+                    </ul>
+                </li>
+                {/empty}
+
+
+
+            </ul>
+        </div>
+    </nav>
+</div>

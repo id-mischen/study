@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/canvas/demo/canvas-learning" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/demo" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/demo/eleme" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/demo/es6tutorial" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/demo/mall-admin-web" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/demo/vue-element-admin" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/demo/vue-hybird-best-practices" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/git/test" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/git2/test" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/php/demo/simle/SimpleAdmin" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/react/day1/mischen" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/react/day2/test" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/react/day3/mischen" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/react/demo/react-pxq" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/react/project/admin" vcs="Git" />
+  </component>
+</project>

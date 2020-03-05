@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>拖拽</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        .box{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: gold;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+
+    </div>
+    <script>
+        let node = document.getElementsByClassName("box")[0];
+        drag(node);
+        function drag(node) {
+            node.onmousedown = function (e) {
+                let offsetX =  e.offsetX ;
+                let offsetY =  e.offsetY ;
+                document.onmousemove = function (e) {
+                    let l = e.clientX - offsetX ;
+                    let t = e.clientY - offsetY ;
+                    let pW = parseInt(getStyle(node.parentNode,'width')) - parseInt(getStyle(node,'width')) ;
+                    let pH = parseInt(getStyle(node.parentNode,'height')) - parseInt(getStyle(node,'height')) ;
+
+                    if( l <= 0){
+                        l = 0 ;
+                    }
+                    if( t <= 0){
+                        t = 0 ;
+                    }
+                    if( l >= pW){
+                        l = pW ;
+                    }
+                    node.style.left =   l + 'px';
+                    node.style.top = t +  'px';
+                };
+                node.onmouseup = function () {
+                    document.onmousemove = null ;
+                }
+            }
+        }
+        function getStyle(node,attr){
+            return node.currentStyle ? node.currentStyle[attr] : getComputedStyle(node)[attr];
+        }
+
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息</title>
+</head>
+<style>
+    table{
+        border: 1px dashed gainsboro;
+    }
+    td{
+        border: 1px dashed gainsboro;
+        padding: 10px;
+    }
+
+</style>
+<body>
+<table  >
+    <tr>
+        <td>user_name</td>
+        <td>name</td>
+        <td>city</td>
+        <td>company</td>
+        <td>address</td>
+        <td>person</td>
+        <td>myself</td>
+
+    </tr>
+    {volist name='information' id='info'}
+    <tr>
+        <td>
+            <?php
+                $username = app\index\model\User :: get($info->user_id);
+                    echo $username['name'];
+            ?>
+        </td>
+        <td>{$info.name}</td>
+        <td>{$info.city}</td>
+        <td>{$info.company}</td>
+        <td>{$info.address}</td>
+        <td>{$info.person}</td>
+        <td>{$info.myself}</td>
+
+    </tr>
+    {/volist}
+</table>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>class</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <!-- 生产环境中不建议使用 -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <style>
+        .ft{
+            font-size: 20px;
+        }
+        .a{
+            color: red;
+        }
+        .b {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+<div id="app"></div>
+<script type="text/babel">
+    // ({
+    //
+    // })()
+    //es6中class ==== function
+    // class  className只能接收字符串
+    //  ()()  {}  if() for()
+    //functiin(){
+    //   function(){
+    // let}
+    // }
+    // (function () {    IIFE 自运行函数  函数型表达式
+    //  let a = 'a'
+    //  return a
+    // })()
+    let cname1 = 'a';  //字符串
+    let cname2 = 'b';  //字符串
+    let isShow = false;
+    let obj = {
+        a: 'a'
+    };
+    function gColor () {
+        return 'a'
+    }
+    //  { } 解析  变量 表达式 方法
+    ReactDOM.render(   //  render接收一个dom数据 进行渲染
+        <div>
+            <h1 className={ isShow ? 'a' : 'b'  }>这是哈哈哈</h1>
+            <h1 className={ isShow ? cname1 : cname2  }>这是哈哈哈</h1>
+            <h1 className={ `ft ${isShow? 'a' : 'b' }`}>这是哈哈哈</h1>
+            <h1 className={ gColor() }>这是哈哈哈</h1>
+            <h1 className={ (function () {
+                return 'a'
+            })() }>这是哈哈哈2</h1>
+        </div>,
+        document.getElementById('app')
+    )
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue双向绑定 - 原理</title>
+    <script src="./index.js"></script>
+</head>
+<body>
+<div id="root">
+    <input type="text" v-model="username">
+    <p> {{username}}</p>
+    <h1>{{nav.title}}</h1>
+    <h2>111111111 {{ username }}</h2>{{ username }}
+    <div class="box">
+        <div>
+            我是测试1
+            <div>
+                我是测试2
+            </div>
+        </div>
+    </div>
+</div>
+    <script>
+        let vm = new MVVM({
+            el: '#root',
+            data:{
+                username: 'rainy',
+                nav:{
+                    title: 'hello world',
+                }
+            },
+        });
+    </script>
+</body>
+</html>

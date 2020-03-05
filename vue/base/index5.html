@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rainy</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+
+</head>
+<body>
+    <div id="root">
+
+            <div :style="{ fontSize: postFontSize + 'em' }">
+                <blog-post
+                        @enlarge-text="postFontSize += $event"
+                        v-for="post in posts"
+                        :post="post"
+                >
+                    <span>这是插槽</span>
+                </blog-post>
+                <button @click="posts[0].title = 'cc'">按钮</button>
+            </div>
+    </div>
+    <script>
+        // Vue.component('v-title',{
+        //    props: ['title'],
+        //    template: '<div>标题：{{ title }}</div>'
+        // });
+        Vue.component('blog-post', {
+            props: ['post'],
+            template: `
+                    <div class="blog-post">
+                      <h3>{{ post.title }}</h3>
+                      <button @click="$emit('enlarge-text', 1)">
+                        Enlarge text
+                      </button>
+                      <slot />
+                      <div v-html="post.content"></div>
+                    </div>
+                  `
+        });
+       let vm = new Vue({
+            el: "#root",
+            data: {
+                posts: [{title: 'Rainy'},{title:'mis_chen'}],
+                postFontSize: 1
+            },
+            created(){
+                this.debounceHandleChange = _.throttle(this.handleChange, 500) ;
+            },
+            methods:{
+                handleChange(){
+                    // this.$set(this.arr, 0, 'hello world') ;
+                    // this.arr.splice(0, 1, 'cc');
+                    // console.log(event) ;
+                    console.log(typeof this.username)
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

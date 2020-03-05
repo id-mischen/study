@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rainy</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <!-- 生产环境中不建议使用 -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <style>
+        .red{
+            color: red;
+            font-size: 20px;
+        }
+        .green{
+            color: green;
+            font-size: 30px;
+        }
+        .border{
+            border:1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        class Index extends React.Component{
+            constructor(){
+                super() ;
+                this.state = {
+                    name: 'Rainy',
+                    arr: [1,2,3],
+                    isBorder: true,
+                    age: '父子的age',
+                    style:{
+                        fontSize: '40px',
+                        color: 'red'
+                    },
+                    style_t:{
+                        border: '1px solid red'
+                    }
+                }
+            }
+            handleChange(){
+                this.setState({
+                    name: 'Mis_+chen',
+                })
+                console.log('hello world') ;
+                console.log(this) ;
+            }
+            render(){
+                let { name, arr, isBorder, style, style_t, age} = {...this.state} ;
+                return(
+                    <div className="index">
+                        <h1> this is Index { name } </h1>
+                        <p className={`red ${isBorder ? 'border' : '' }`}> { name }</p>
+                        <h1 style={ {...style,...style_t } }>hello world</h1>
+                        <button onClick={ this.handleChange.bind(this) }>按钮</button>
+                        <ul>
+                            {
+                                arr.map( item => <li> {item}</li>)
+                            }
+                        </ul>
+                        <h2 className="green">-----</h2>
+                        <Son age={ age }></Son>
+                    </div>
+                )
+            }
+        }
+        class Son extends React.Component{
+            constructor(){
+                super()
+                this.state = {
+                   age: '儿子的age'
+                }
+            }
+
+            render(){
+                let { age } = { ...this.state} ;
+                return(
+                    <div>
+                        <h1>{ age }</h1>
+                        <h2>{ this.props.age }</h2>
+                    </div>
+                )
+            }
+        }
+        function Router(){
+            return (
+                    <Index></Index>
+            )
+        }
+        ReactDOM.render(
+            <Router />,
+            document.getElementById("root")
+        )
+    </script>
+</body>
+</html>

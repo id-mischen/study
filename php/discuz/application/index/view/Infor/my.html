@@ -1,0 +1,69 @@
+    {include file='common/header'}
+            {include file='common/mainleft'}
+                {notempty name='information'}
+              <form method="POST" action="__ROOT__/Infor/UpdateData" >
+                  <h5><i class="fa fa-tasks"></i>&nbsp;&nbsp;修改信息</h5>
+          <div class="form-group">
+            <input class="form-control" placeholder="昵称" name="nickname" type="text" value="{$information->name}">
+          </div>
+          <div class="form-group">
+            <input class="form-control" placeholder="城市" name="city" type="text" value="{$information->city}">
+            <div class="help-block">请用中文填写所在城市</div>
+          </div>
+          <div class="form-group">
+            <input class="form-control" placeholder="公司" name="company" type="text" value="{$information->company}">
+          </div>
+          <div class="form-group">
+            <input class="form-control" placeholder="地址" name="address" type="text" value="{$information->address}">
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" rows="3" placeholder="个性签名" name="signature" cols="50" ></textarea>
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" rows="3" placeholder="自我介绍" name="myself" cols="50" ></textarea>
+          </div>
+
+          <div class="form-group status-post-submit">
+            <input class="btn btn-primary"  type="submit" value="更新">
+          </div>
+        </form>
+
+    {else/}
+    <form method="POST" action="__ROOT__/Infor/InsertData" >
+        <h5><i class="fa fa-tasks"></i>&nbsp;&nbsp;修改信息</h5>
+        <div class="form-group">
+            <input class="form-control" placeholder="昵称" name="nickname" type="text">
+        </div>
+        <div class="form-group">
+            <input class="form-control" placeholder="城市" name="city" type="text">
+            <div class="help-block">请用中文填写所在城市</div>
+        </div>
+        <div class="form-group">
+            <input class="form-control" placeholder="公司" name="company" type="text">
+        </div>
+        <div class="form-group">
+            <input class="form-control" placeholder="地址" name="address" type="text">
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" rows="3" placeholder="个性签名" name="signature" cols="50"></textarea>
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" rows="3" placeholder="自我介绍" name="myself" cols="50"></textarea>
+        </div>
+
+        <div class="form-group status-post-submit">
+            <input class="btn btn-primary" id="user-edit-submit" type="submit" value="插入">
+        </div>
+    </form>
+    {/notempty}
+            </div>
+    </div>
+  </div>
+
+
+</div>
+       </div>
+
+
+
+        {include file='common/footer'}

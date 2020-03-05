@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文章-点赞信息</title>
+</head>
+<body>
+{volist name='praisedata' id='praise'}
+<table >
+    <tr>
+        <td>标题：{$praise.title}  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 作者：<?=$praise->user->name?></td>
+    </tr>
+    <tr>
+
+        <td>点赞者：|
+            <?php
+            foreach($praise->praise as $data){
+                    $time = date('Y-m-d H:i:s',$data->created_at);
+                    $username = app\index\model\User :: get($data->user_id);
+                    echo $username['name']."-".$time. '&nbsp&nbsp&nbsp&nbsp |';
+                }
+            ?>
+        </td>
+    </tr>
+
+</table>
+<hr>
+{/volist}
+
+</body>
+</html>

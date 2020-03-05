@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <my-title  :title="fTitle" @go="handleSon" ref="son"></my-title>
+        <button @click="getSon" >获取数据--父组件</button>
+    </div>
+    <script>
+        Vue.component('my-title',{
+           props:{
+               title:{
+                   type: String,
+                   default: ''
+               }
+           },
+           template: '<div > ----子组件 {{ title }} --' +
+               '<button @click="handleChange"> 改变父组件</button></div>',
+            methods:{
+               handleChange(){
+                   this.$emit('go','change son')
+               }
+            }
+        });
+        new Vue({
+            el:"#root",
+            data:{
+                fTitle:'rainy'
+            },
+            methods:{
+                handleSon(data){
+                    this.fTitle = data;
+                },
+                getSon(){
+                    console.log("hello world") ;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

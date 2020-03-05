@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/draggable-example" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/news" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/specialEffect" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vue-next" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vue2-elm" vcs="Git" />
+  </component>
+</project>

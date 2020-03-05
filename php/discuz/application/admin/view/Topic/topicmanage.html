@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文章-详细信息</title>
+</head>
+<body>
+<table >
+    <tr>
+        <td>标题</td>
+        <td>内容</td>
+        <td>发表者</td>
+        <td>分类</td>
+        <td>发表时间</td>
+        <td>标签</td>
+        <td>评论总数</td>
+        <td>点赞总数</td>
+    </tr>
+    {volist name='topicdata' id='topic'}
+    <tr>
+        <td>{$topic.title}</td>
+        <td><?php echo mb_substr($topic->content,0,30)."。。。。。"?></td>
+        <td>{$topic->user->name}</td>
+        <td>{$topic.category_id}</td>
+        <td><?=date('Y-m-d H:i:s',$topic->created_at)?></td>
+        <td><?php
+            foreach($topic->tag as $tag){
+                echo $tag->name;
+            }
+        ?></td>
+        <td>{$topic->reply_count}</td>
+        <td>{$topic->praise_count}</td>
+    </tr>
+    {/volist}
+</table>
+
+</body>
+</html>

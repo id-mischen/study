@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文章-评论信息</title>
+</head>
+<body>
+{volist name='commentdata' id='comment'}
+<table>
+    <tr>
+        <td>标题:<?=mb_substr($comment->title,0,5)."..."?></td>
+        <td>作者:{$comment->user->name}</td>
+    </tr>
+    <tr>
+        <td>评论者</td>
+        <td>内容</td>
+        <td>评论时间</td>
+    </tr>
+    <?php
+        foreach($comment->reply as $data){
+    ?>
+    <tr>
+        <td><?php
+                $username = app\index\model\User :: get($data->user_id);
+            echo $username['name'];
+            ?></td>
+        <td>{$data->content}</td>
+        <td><?=date('Y-m-d H:i:s',$data->created_at)?></td>
+    </tr>
+    <?php
+        }
+    ?>
+</table>
+    <hr>
+    {/volist}
+    {$pages}
+
+
+</body>
+</html>
